@@ -6,6 +6,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     ElCol: typeof import('element-plus/es')['ElCol']
     ElImage: typeof import('element-plus/es')['ElImage']
+    ElInput: typeof import('element-plus/es')['ElInput']
     ElRow: typeof import('element-plus/es')['ElRow']
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
@@ -15,6 +16,7 @@ declare module 'vue' {
     HomeGroup: typeof import('./src/components/HomePage/HomeGroup.vue')['default']
     HomeHeader: typeof import('./src/components/HomePage/HomeHeader.vue')['default']
     HomeNews: typeof import('./src/components/HomePage/HomeNews.vue')['default']
+    HomePopular: typeof import('./src/components/HomePage/HomePopular.vue')['default']
     HomeRoute: typeof import('./src/components/HomePage/HomeRoute.vue')['default']
     SvgIcon: typeof import('./src/components/SvgIcon.vue')['default']
     TripCard: typeof import('./src/components/TripCard.vue')['default']

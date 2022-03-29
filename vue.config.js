@@ -23,9 +23,9 @@ module.exports = defineConfig({
       .options({ symbolId: "icon-[name]" })
 
     // 修改 images-loader 配置
-    config.module
-      .rule("images")
-      .exclude.add(resolve("src/assets/icon"))
+    // config.module
+    //   .rule("images")
+    //   .exclude.add(resolve("src/assets/images"))
   },
   configureWebpack: config =>{
     return {

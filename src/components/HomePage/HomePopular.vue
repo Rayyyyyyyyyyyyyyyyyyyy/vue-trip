@@ -1,9 +1,6 @@
 <template lang="pug">
-.trip-card
-  .trip-card-img
-
-
-
+.popular
+  TripCard
 
 
 
@@ -14,20 +11,17 @@
 
 import {defineComponent, onMounted} from "vue";
 import AOS from "aos";
+import TripCard from "@/components/TripCard.vue";
 
 export default defineComponent({
-  name: "TripCard",
+  name: "HomeGroup",
+  components: {
+    TripCard
+  },
   props: {
-    imgUrl: {
-      type: String,
-    }
+
   },
   setup(props) {
-
-    onMounted(()=>{
-      AOS.init()
-    })
-
 
 
 
@@ -38,8 +32,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.trip-card {
-  @apply w-full rounded-lg shadow-md;
-  @apply flex flex-col;
+.popular {
+  @apply py-8 w-full h-screen;
+
 }
 </style>

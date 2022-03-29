@@ -1,20 +1,28 @@
 <template lang="pug">
 .landing-header
+  .landing-header--search
+    SearchInput
   .introduction.text-vertical
     .introduction--line
     .introduction--text Introduction
 .container
   HomeExplore
+  HomePopular
 </template>
 
 <script lang="ts">
 import {defineComponent, onMounted} from "vue";
 import HomeExplore from "@/components/HomePage/HomeExplore.vue";
-import AOS from "aos";
+import HomePopular from "@/components/HomePage/HomePopular.vue";
+import SearchInput from "@/components/SearchInput.vue";
 
 export default defineComponent({
   name: "HomePage",
-  components: {HomeExplore},
+  components: {
+    SearchInput,
+    HomeExplore,
+    HomePopular,
+  },
   props: {
 
   },
@@ -38,6 +46,9 @@ export default defineComponent({
   background: url("@/assets/images/banner/yilan-county.jpg") no-repeat;
   background-size: cover;
 
+  &--search {
+    @apply absolute top-1/3 left-1/4 z-30 w-1/2;
+  }
 
 
   .introduction{

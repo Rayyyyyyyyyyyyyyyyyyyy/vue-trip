@@ -1,10 +1,5 @@
 <template lang="pug">
-.trip-card
-  .trip-card-img
-
-
-
-
+el-input()
 
 
 
@@ -14,20 +9,17 @@
 
 import {defineComponent, onMounted} from "vue";
 import AOS from "aos";
+import TripCard from "@/components/TripCard.vue";
 
 export default defineComponent({
-  name: "TripCard",
+  name: "SearchInput",
+  components: {
+
+  },
   props: {
-    imgUrl: {
-      type: String,
-    }
+
   },
   setup(props) {
-
-    onMounted(()=>{
-      AOS.init()
-    })
-
 
 
 
@@ -38,8 +30,12 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.trip-card {
-  @apply w-full rounded-lg shadow-md;
-  @apply flex flex-col;
+::v-deep(){
+  .el-input{
+    &__inner{
+      @apply h-12;
+    }
+  }
 }
+
 </style>

@@ -31,11 +31,11 @@ export default defineComponent({
       showHeader: true
     })
     const router = useRoute()
-    const appDom = (document.querySelector("#app") as HTMLElement)
 
     const getWindowScroll = () => {
-      appDom.addEventListener("scroll", ()=>{
-        state.showHeader = appDom.scrollTop <= 200;
+      window.addEventListener("scroll", ()=>{
+
+        state.showHeader = window.scrollY <= 200;
       })
     }
 
@@ -45,7 +45,7 @@ export default defineComponent({
 
     watch(()=>router.name, ()=>{
       if(router.name != RouterNames.home) {
-        appDom.removeEventListener("scroll", ()=> {})
+        window.removeEventListener("scroll", ()=> {})
       }
     })
 
