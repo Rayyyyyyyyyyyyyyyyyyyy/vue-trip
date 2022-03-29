@@ -5,13 +5,28 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: "#18ea71",
-
+          DEFAULT: "#4464BE",
+          light: "#46BEEB",
+          fb: "#1877f2",
+          twitter: "#1da1f2"
         },
         secondary: {
-          DEFAULT: "#9f9f9f",
+          DEFAULT: "#E9EDF0",
+          light: "#fff",
+          dark: "#707070",
         },
-
+        success: "#8FC69A",
+        warning: "#F9669C",
+        bg: {
+          DEFAULT: "#F5F3F4",
+          footer: "#26272B",
+          icon: "#33353D",
+          red: "#FF5555"
+        },
+        text: {
+          DEFAULT: "#000",
+        }
+      },
       fontFamily: {
         SFProDisplay: [
           "SFProDisplay",
@@ -24,9 +39,24 @@ module.exports = {
 
     }
   },
-
+  variants: {
+    extend: {
+      fill: ["hover"],
+      stroke: ["hover"],
+    }
+  },
   plugins: [
+    function ({ addComponents, theme }) {
+      addComponents({
+        ".text-vertical": {
+          "writing-mode": "vertical-lr",
+          "letter-spacing": "0.25rem"
+        }
 
+      })
+    }
   ],
-
+  experimental: {
+    applyComplexClasses: true
+  }
 };

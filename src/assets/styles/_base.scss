@@ -30,7 +30,7 @@ html {
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  @apply font-SFProDisplay w-screen h-screen overflow-hidden text-textfirst bg-bg;
+  @apply font-SFProDisplay w-screen h-screen overflow-hidden overflow-y-auto bg-bg;
 }
 
 .container {
@@ -45,7 +45,7 @@ html {
 }
 
 .page-title {
-  @apply text-2xl text-textfirst font-medium;
+  @apply text-2xl font-medium;
   line-height: 1;
 }
 
