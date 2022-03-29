@@ -1,0 +1,54 @@
+@font-face {
+  font-family: 'SFProDisplay';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('SF Pro Display'), url('../fonts/SFProDisplay-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'SFProDisplay';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: local('SF Pro Display'), url('../fonts/SFProDisplay-Medium.ttf');
+}
+
+html {
+  font-size: 16px;
+  @apply font-SFProDisplay;
+
+  @media (max-width: 639px) {
+    font-size: 14px;
+  }
+
+  @media (max-width: 320px) {
+    font-size: 12px;
+  }
+}
+
+#app {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  @apply font-SFProDisplay w-screen h-screen overflow-hidden text-textfirst bg-bg;
+}
+
+.container {
+  width: 100%;
+  max-width: 100%;
+  @apply px-4 pb-4 mx-auto mt-12;
+
+  &--page {
+    width: 1000px;
+    max-width: 100%;
+  }
+}
+
+.page-title {
+  @apply text-2xl text-textfirst font-medium;
+  line-height: 1;
+}
+
+a, button {
+  outline: none !important;
+}
