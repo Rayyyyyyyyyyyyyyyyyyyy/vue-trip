@@ -9,17 +9,25 @@
 
   .explore-banner
     .explore-banner-left
-      .explore-banner-item
+      .explore-banner-item(
+        data-aos="fade-right"
+      )
         .hover-box
         img(:src="require('@/assets/images/explore/e1.jpg')" alt="explore-img")
-      .explore-banner-item
+      .explore-banner-item(
+        data-aos="fade-up-right"
+      )
         .hover-box
         img(:src="require('@/assets/images/explore/e2.jpg')" alt="explore-img")
     .explore-banner-right
-      .explore-banner-item
+      .explore-banner-item(
+        data-aos="fade-left"
+      )
         .hover-box
         img(:src="require('@/assets/images/explore/e6.jpg')" alt="explore-img")
-      .explore-banner-right--bottom
+      .explore-banner-right--bottom(
+        data-aos="fade-up-left"
+      )
         .explore-banner-item
           .hover-box
           img(:src="require('@/assets/images/explore/e3.jpg')" alt="explore-img")
@@ -44,12 +52,11 @@ export default defineComponent({
   },
   setup(props) {
 
+
     onMounted(()=>{
       AOS.init()
+
     })
-
-
-
 
     return {
 

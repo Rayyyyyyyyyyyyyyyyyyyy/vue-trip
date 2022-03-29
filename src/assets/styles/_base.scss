@@ -30,7 +30,7 @@ html {
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  @apply font-SFProDisplay w-screen h-screen overflow-hidden overflow-y-auto bg-bg;
+  @apply font-SFProDisplay w-screen overflow-hidden bg-bg;
 }
 
 .container {

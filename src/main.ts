@@ -5,8 +5,8 @@ import router from "./router";
 import "@/assets/styles/tailwind.scss";
 import svgIconPlugin from "@/plugins/svgIcon";
 import "aos/dist/aos.css";
-import App from "./App.vue"
 import dayjs from "dayjs";
+import App from "./App.vue"
 
 const app = createApp(App)
 app.config.globalProperties.$dayjs = dayjs;

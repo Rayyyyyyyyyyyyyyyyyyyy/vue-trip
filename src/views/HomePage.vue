@@ -9,8 +9,8 @@
 
 <script lang="ts">
 import {defineComponent, onMounted} from "vue";
-import AOS from "aos";
 import HomeExplore from "@/components/HomePage/HomeExplore.vue";
+import AOS from "aos";
 
 export default defineComponent({
   name: "HomePage",
@@ -20,9 +20,8 @@ export default defineComponent({
   },
   setup(props) {
 
-    onMounted(()=>{
-      AOS.init()
-    })
+
+
 
 
 
