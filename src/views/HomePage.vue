@@ -47,7 +47,7 @@ export default defineComponent({
   background-size: cover;
 
   &--search {
-    @apply absolute top-1/3 left-1/4 z-30 w-1/2;
+    @apply absolute top-1/2 left-1/4 z-30 w-3/5;
   }
 
 

@@ -5,6 +5,7 @@ declare global {
   const ElImage: typeof import('element-plus/es')['ElImage']
   const ElInput: typeof import('element-plus/es')['ElInput']
   const ElRow: typeof import('element-plus/es')['ElRow']
+  const ElSelect: typeof import('element-plus/es')['ElSelect']
   const ElTabPane: typeof import('element-plus/es')['ElTabPane']
   const ElTabs: typeof import('element-plus/es')['ElTabs']
 }

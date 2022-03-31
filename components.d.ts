@@ -8,6 +8,7 @@ declare module 'vue' {
     ElImage: typeof import('element-plus/es')['ElImage']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElRow: typeof import('element-plus/es')['ElRow']
+    ElSelect: typeof import('element-plus/es')['ElSelect']
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
     FooterComponent: typeof import('./src/components/FooterComponent.vue')['default']
@@ -18,6 +19,7 @@ declare module 'vue' {
     HomeNews: typeof import('./src/components/HomePage/HomeNews.vue')['default']
     HomePopular: typeof import('./src/components/HomePage/HomePopular.vue')['default']
     HomeRoute: typeof import('./src/components/HomePage/HomeRoute.vue')['default']
+    SearchInput: typeof import('./src/components/SearchInput.vue')['default']
     SvgIcon: typeof import('./src/components/SvgIcon.vue')['default']
     TripCard: typeof import('./src/components/TripCard.vue')['default']
   }

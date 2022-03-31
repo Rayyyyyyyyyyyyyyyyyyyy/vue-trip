@@ -1,7 +1,7 @@
 
 <template lang="pug">
 .header.home-header-style
-  svg-icon(name="logo" :width="160" :height="80" )
+  svg-icon(name="header-logo" :width="160" :height="80" )
   .header_center
     el-tabs(v-model="activeName"  @tab-click="handleClick")
       el-tab-pane(label="行程規劃" name="planning")
