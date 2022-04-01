@@ -21,6 +21,7 @@ declare module 'vue' {
     HomeRoute: typeof import('./src/components/HomePage/HomeRoute.vue')['default']
     SearchInput: typeof import('./src/components/SearchInput.vue')['default']
     SvgIcon: typeof import('./src/components/SvgIcon.vue')['default']
+    TaiwanMap: typeof import('./src/components/HomePage/TaiwanMap.vue')['default']
     TripCard: typeof import('./src/components/TripCard.vue')['default']
   }
 }

@@ -41,15 +41,14 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .popular {
-  @apply py-10 w-full relative;
+  @apply py-10 w-full relative my-6;
   min-height: 500px;
 
   &--bg {
-    @apply h-1/2  bg-primary-light/20;
+    @apply h-5/6 w-screen bg-primary-light/20;
     @apply absolute top-0 left-0;
     min-height: 300px;
-    transform: translateX(10%);
-    width: 85vw;
+    transform: translateX(2%);
     z-index: 1;
 
   }

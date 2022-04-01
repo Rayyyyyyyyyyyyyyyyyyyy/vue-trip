@@ -67,7 +67,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .explore {
-  @apply py-8 w-full;
+  @apply py-8 w-full mb-6;
   min-height: 650px;
   &-title {
     @apply flex items-center mb-8;
