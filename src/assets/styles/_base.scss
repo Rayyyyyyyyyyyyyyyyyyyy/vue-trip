@@ -37,6 +37,7 @@ html {
   width: 100%;
   max-width: 100%;
   @apply px-8 pb-4 mx-auto mt-12;
+  @apply w-10/12;
 
   &--page {
     width: 1000px;

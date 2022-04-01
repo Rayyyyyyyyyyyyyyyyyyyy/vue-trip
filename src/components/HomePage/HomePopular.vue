@@ -2,8 +2,13 @@
 .popular
   .popular--bg
   .page-title.popular--title 熱門行程
-  .popular--row
-    TripCard(:imgUrl="testImg")
+  el-row(:gutter="20").popular--row
+    el-col(:span="8")
+      TripCard(:imgUrl="testImg")
+    el-col(:span="8")
+      TripCard(:imgUrl="testImg")
+    el-col(:span="8")
+      TripCard(:imgUrl="testImg")
 
 
 
@@ -36,15 +41,16 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .popular {
-  @apply py-8 w-full relative;
+  @apply py-10 w-full relative;
   min-height: 500px;
 
   &--bg {
-    @apply h-1/2 w-full bg-primary-light/20;
-    @apply z-10;
+    @apply h-1/2  bg-primary-light/20;
     @apply absolute top-0 left-0;
     min-height: 300px;
-    transform: translateX(5%);
+    transform: translateX(10%);
+    width: 85vw;
+    z-index: 1;
 
   }
 
@@ -54,6 +60,11 @@ export default defineComponent({
     @apply bg-bg z-30 inline;
     @apply p-4;
     @apply border-b-4 border-text;
+  }
+
+  &--row {
+    @apply absolute ;
+    @apply top-24 z-30;
 
   }
 

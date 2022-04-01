@@ -5,7 +5,7 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: "#4464BE",
+          DEFAULT: "#4464be",
           light: "#46BEEB",
           fb: "#1877f2",
           twitter: "#1da1f2"
@@ -25,7 +25,8 @@ module.exports = {
           red: "#FF5555",
         },
         text: {
-          DEFAULT: "#000",
+          DEFAULT: "#3C3C3C",
+          light: "#8E8E8E"
         }
       },
       fontFamily: {
