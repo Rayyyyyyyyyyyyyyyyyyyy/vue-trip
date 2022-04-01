@@ -50,7 +50,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .search{
   @apply bg-bg shadow-lg rounded-full h-14 w-full pl-6 pr-16 py-4;
-  @apply flex items-center relative;
+  @apply flex items-center relative ;
 
   &-select {
     @apply flex items-center;

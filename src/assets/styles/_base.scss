@@ -36,7 +36,7 @@ html {
 .container {
   width: 100%;
   max-width: 100%;
-  @apply px-4 pb-4 mx-auto mt-12;
+  @apply px-8 pb-4 mx-auto mt-12;
 
   &--page {
     width: 1000px;
@@ -45,10 +45,14 @@ html {
 }
 
 .page-title {
-  @apply text-2xl font-medium;
+  @apply text-3xl font-medium;
   line-height: 1;
 }
 
+.page-sub-title {
+  @apply text-2xl font-medium;
+  line-height: 1;
+}
 a, button {
   outline: none !important;
 }

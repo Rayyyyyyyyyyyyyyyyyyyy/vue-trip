@@ -1,6 +1,7 @@
 <template lang="pug">
 .trip-card
   .trip-card-img
+    img(:src="imgUrl")
 
 
 

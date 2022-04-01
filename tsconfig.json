@@ -13,6 +13,7 @@
     "useDefineForClassFields": true,
     "sourceMap": true,
     "baseUrl": ".",
+    "typeRoots" : ["node_modules/@types", "src/types"],
     "types": [
       "webpack-env"
     ],
@@ -35,7 +36,6 @@
     "tests/**/*.ts",
     "tests/**/*.tsx",
     "src/**/*.svg",
-
   ],
   "exclude": [
     "node_modules"

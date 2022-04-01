@@ -19,9 +19,10 @@ module.exports = {
         warning: "#F9669C",
         bg: {
           DEFAULT: "#F5F3F4",
+          light: "#bed2ef",
           footer: "#26272B",
           icon: "#33353D",
-          red: "#FF5555"
+          red: "#FF5555",
         },
         text: {
           DEFAULT: "#000",
