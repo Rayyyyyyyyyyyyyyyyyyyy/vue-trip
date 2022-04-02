@@ -3,11 +3,17 @@
   .popular--bg
   .page-title.popular--title 熱門行程
   el-row(:gutter="20").popular--row
-    el-col(:span="8")
+    el-col(:span="8"
+      data-aos="fade-left"
+      data-aos-delay="500")
       TripCard(:imgUrl="testImg")
-    el-col(:span="8")
+    el-col(:span="8"
+      data-aos="fade-left"
+      data-aos-delay="600")
       TripCard(:imgUrl="testImg")
-    el-col(:span="8")
+    el-col(:span="8"
+      data-aos="fade-left"
+      data-aos-delay="700")
       TripCard(:imgUrl="testImg")
 
 
@@ -17,7 +23,6 @@
 
 </template>
 <script lang="ts">
-
 import {defineComponent, onMounted} from "vue";
 import AOS from "aos";
 import TripCard from "@/components/TripCard.vue";
@@ -30,8 +35,16 @@ export default defineComponent({
   },
   props: {
 
+
+
   },
   setup(props) {
+
+    onMounted(()=>{
+      AOS.init()
+    })
+
+
     return {
       testImg
     }
@@ -42,7 +55,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .popular {
   @apply py-10 w-full relative my-6;
-  min-height: 500px;
+  min-height: 650px;
 
   &--bg {
     @apply h-5/6 w-screen bg-primary-light/20;

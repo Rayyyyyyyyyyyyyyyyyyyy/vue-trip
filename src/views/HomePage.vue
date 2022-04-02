@@ -23,6 +23,7 @@
 .container
   HomeExplore
   HomePopular
+  HomeNews
 </template>
 
 <script lang="ts">
@@ -33,6 +34,7 @@ import SearchInput from "@/components/SearchInput.vue";
 import AOS from "aos";
 import SvgIcon from "@/components/SvgIcon.vue";
 import TaiwanMap from "@/components/HomePage/TaiwanMap.vue";
+import HomeNews from "@/components/HomePage/HomeNews.vue";
 
 export default defineComponent({
   name: "HomePage",
@@ -42,6 +44,7 @@ export default defineComponent({
     SearchInput,
     HomeExplore,
     HomePopular,
+    HomeNews
   },
   props: {
 

@@ -1,6 +1,7 @@
 <template lang="pug">
-
-
+.news
+  .news-bg.news-main
+  .news-bg.news-main
 
 
 
@@ -34,5 +35,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.news {
 
+}
 </style>

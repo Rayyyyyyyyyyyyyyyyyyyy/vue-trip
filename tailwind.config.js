@@ -11,9 +11,9 @@ module.exports = {
           twitter: "#1da1f2"
         },
         secondary: {
-          DEFAULT: "#E9EDF0",
+          DEFAULT: "#818383",
           light: "#fff",
-          dark: "#707070",
+          dark: "#323131",
         },
         success: "#8FC69A",
         warning: "#F9669C",
