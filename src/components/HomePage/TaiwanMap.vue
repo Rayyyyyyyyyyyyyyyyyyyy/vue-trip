@@ -316,9 +316,14 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, onMounted} from "vue";
+import {defineComponent, onMounted, toRefs} from "vue";
 import AOS from "aos";
 import BaseApi from "@/services/api";
+import map from "@/store/map";
+import axios from "axios";
+import {MAP_API_DOMAIN, MAP_API_KEY} from "@/config";
+import {reactive} from "@vue/reactivity";
+import {ElMessage} from "element-plus";
 
 export default defineComponent({
   name: "TaiwanMap",
@@ -329,20 +334,44 @@ export default defineComponent({
 
   },
   setup(props) {
+    const state = reactive({
+      lat: 0,
+      lng: 0
+    });
 
     const getWeather = async () => {
       const result = await BaseApi.getWeatherData()
+      // console.log("result", result)
+    }
+
+    const localSuccess = async (position: any) => {
+      console.log("position", position)
+      const latlng = position.coords.latitude + "," + position.coords.longitude
+      const result = await BaseApi.getAddress({
+        latlng: latlng,
+        key: MAP_API_KEY!
+      })
       console.log("result", result)
     }
 
-    onMounted(()=>{
-      AOS.init()
-      getWeather()
+
+
+
+
+
+    onMounted(async ()=>{
+      await navigator.geolocation.getCurrentPosition(localSuccess, (err)=>{
+        ElMessage.error(err.message);
+      })
+      // await getWeather()
+
+
     })
 
 
 
     return {
+      ...toRefs(state)
     }
   }
 });

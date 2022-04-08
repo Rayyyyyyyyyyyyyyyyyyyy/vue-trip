@@ -1,9 +1,14 @@
 
 import { ElMessage } from "element-plus";
 import axios from "axios";
-import {API_DOMAIN, MAP_API_DOMAIN, WEATHER_API_DOMAIN} from "@/config";
+import {
+  API_DOMAIN,
+  MAP_API_DOMAIN,
+  WEATHER_API_DOMAIN
+} from "@/config";
 import { StatusCodes } from "http-status-codes";
-import { EApiPaths, map_domainUrl} from "@/const/appConsts";
+import {EApiPaths, weather_url} from "@/const/appConsts";
+import {GetMapLocal} from "@/types/apiTypes";
 
 const axiosGeneral = axios.create({
   baseURL: API_DOMAIN,
@@ -19,14 +24,13 @@ const axiosMap = axios.create({
 });
 
 
-
 axios.defaults.headers.common["Authorization"] = ""
 axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
 axios.defaults.headers.common["crossDomain"] = true;
 
 function updateAuthorizationToken() {
-
 }
+
 const ENCODING_WORKAROUND_KEY = Symbol();
 
 
@@ -130,7 +134,23 @@ function getWeather<T>(url: string, data: Record<string, any> = {}): Promise<T> 
   return new Promise((resolve, reject) => {
     axiosWeather({
       method: "get",
-      url: url + map_domainUrl,
+      url: url + weather_url,
+      params: data
+    })
+      .then(res => {
+        resolve(res.data);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+}
+
+function getMapLocal<T>(url: string, data: Record<string, any> = {}): Promise<T> {
+  return new Promise((resolve, reject) => {
+    axiosMap({
+      method: "get",
+      // url,
       params: data
     })
       .then(res => {
@@ -184,7 +204,11 @@ function del(url: string, data: Record<string, any>): Promise<any> {
 
 const BaseApi = {
   getWeatherData(): Promise<any> {
-    return getWeather(`${EApiPaths.future36}`);
+    return getWeather(EApiPaths.future36);
+  },
+
+  getAddress(payload: GetMapLocal): Promise<any> {
+    return getMapLocal("", payload);
   },
 
 

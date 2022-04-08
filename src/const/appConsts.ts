@@ -1,9 +1,10 @@
-import {API_WEATHER_KEY} from "@/config";
+import {API_WEATHER_KEY, MAP_API_KEY} from "@/config";
 
-export const map_domainUrl = `?Authorization=${(API_WEATHER_KEY!).toString()}&format=JSON`
+export const weather_url =  `?Authorization=${(API_WEATHER_KEY!)}&format=JSON`
+
 
 export enum EApiPaths {
-  future36 = "F-C0032-001"
+  future36 = "F-C0032-001",
 
 }
 
