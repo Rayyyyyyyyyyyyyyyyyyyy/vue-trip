@@ -3,15 +3,16 @@
 .header.home-header-style
   svg-icon(name="header-logo" :width="160" :height="80" )
   .header_center
-    el-tabs(v-model="activeName"  @tab-click="handleClick")
-      el-tab-pane(label="行程規劃" name="planning")
-      el-tab-pane(label="揪團旅行" name="group")
-      el-tab-pane(label="達人講座" name="lecture")
-  .header_right
+
+  .header_right(v-if="isAuth")
     svg-icon(name="shopping-cart" :width="32" :height="32" color="#fff" )
     .profile-img
       el-image(:src="require('@/assets/images/cat-robbit.jpeg')" alt="profileIMG" fit="cover" )
 
+  .header_right(v-else)
+    el-button.btn(
+      @click="goSignUrl"
+      plain) Sign in/up
 
 
 
@@ -20,33 +21,38 @@
 
 </template>
 <script lang="ts">
-import {reactive} from "@vue/reactivity";
 import SvgIcon from "@/components/SvgIcon.vue";
-import {defineComponent, onMounted, toRefs} from "vue";
-import AOS from "aos";
+import {defineComponent} from "vue";
+import {useRouter} from "vue-router";
+import RouterNames from "@/router/name";
 
 
 export default defineComponent({
   name: "HomeHeader",
-  components: {SvgIcon},
+  components: {
+    SvgIcon
+  },
   props: {
+    isAuth: {
+      type: Boolean,
+      default: false
+    }
 
   },
   setup(props) {
 
+    const router = useRouter()
 
-    const state = reactive({
-      activeName: "planning"
-    })
-
-    const handleClick = () => {
-      console.log("handleClick")
+    const goSignUrl = () => {
+      router.push({
+        name: RouterNames.signIn
+      })
     }
 
 
+
     return {
-      ...toRefs(state),
-      handleClick,
+      goSignUrl
     }
   }
 });
@@ -62,10 +68,16 @@ export default defineComponent({
   &_center {
     @apply flex-1;
     @apply flex items-center justify-center;
+
   }
   &_right {
     @apply border-l-2 border-white pl-4;
     @apply flex items-center justify-between;
+    width: 15%;
+    .btn{
+      @apply w-full bg-transparent text-white border-transparent;
+    }
+
   }
   .svg-icon {
     @apply cursor-pointer;
@@ -88,7 +100,7 @@ export default defineComponent({
   }
 }
 .profile-img{
- @apply w-8 h-8 rounded-full bg-secondary overflow-hidden ml-4;
+ @apply w-8 h-8 rounded-full bg-secondary overflow-hidden ml-6;
 }
 
 .home-header-style {

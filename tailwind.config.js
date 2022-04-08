@@ -7,8 +7,6 @@ module.exports = {
         primary: {
           DEFAULT: "#4464be",
           light: "#46BEEB",
-          fb: "#1877f2",
-          twitter: "#1da1f2"
         },
         secondary: {
           DEFAULT: "#818383",
@@ -21,12 +19,16 @@ module.exports = {
           DEFAULT: "#F5F3F4",
           light: "#bed2ef",
           footer: "#26272B",
-          icon: "#33353D",
-          red: "#FF5555",
         },
         text: {
           DEFAULT: "#3C3C3C",
           light: "#8E8E8E"
+        },
+        icons: {
+          DEFAULT: "#33353D",
+          fb: "#1877f2",
+          twitter: "#1da1f2",
+          yt: "#FF5555",
         }
       },
       fontFamily: {

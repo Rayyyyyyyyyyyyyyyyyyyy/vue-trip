@@ -14,7 +14,7 @@ import {defineComponent, onMounted} from "vue";
 import AOS from "aos";
 
 export default defineComponent({
-  name: "HomeRoute",
+  name: "SignUp",
   props: {
 
   },

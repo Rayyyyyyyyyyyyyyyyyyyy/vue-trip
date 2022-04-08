@@ -1,0 +1,10 @@
+.input-card{
+  @apply flex flex-col items-start;
+  .label {
+    @apply mb-2;
+  }
+}
+
+.input-card + .input-card {
+  @apply mt-4;
+}

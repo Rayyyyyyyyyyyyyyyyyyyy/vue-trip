@@ -352,7 +352,7 @@ svg{
   }
 
   path:hover {
-    @apply fill-neutral-500;
+    fill: #4464be;
     stroke-width: 7;
   }
 

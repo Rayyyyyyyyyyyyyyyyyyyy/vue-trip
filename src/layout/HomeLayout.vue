@@ -16,7 +16,7 @@ import RouterNames from "@/router/name";
 import AOS from "aos";
 
 export default defineComponent({
-  name: "HomeGroup",
+  name: "HomeLayout",
   components: {
     HomeHeader,
     FooterComponent

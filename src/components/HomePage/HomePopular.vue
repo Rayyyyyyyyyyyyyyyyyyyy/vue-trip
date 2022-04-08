@@ -16,6 +16,11 @@
       data-aos-delay="700")
       TripCard(:imgUrl="testImg")
 
+  el-button.btn.more-btn(
+    data-aos="zoom-in"
+    type="info" plain
+    size="large") 更多
+
 
 
 
@@ -58,7 +63,7 @@ export default defineComponent({
   min-height: 650px;
 
   &--bg {
-    @apply h-5/6 w-screen bg-primary-light/20;
+    @apply h-3/4 w-screen bg-primary-light/20;
     @apply absolute top-0 left-0;
     min-height: 300px;
     transform: translateX(2%);
@@ -80,5 +85,8 @@ export default defineComponent({
 
   }
 
+}
+.more-btn {
+  @apply absolute bottom-0 left-1/2;
 }
 </style>

@@ -72,7 +72,6 @@ export default defineComponent({
   @apply z-30;
 
   &--img {
-    @apply h-1/2;
     @apply z-20;
     @apply overflow-hidden;
 
@@ -87,7 +86,7 @@ export default defineComponent({
     &-alt {
       @apply absolute left-0 z-30;
       top: -20px;
-      @apply bg-primary-twitter/50 text-white;
+      @apply bg-icons-twitter/50 text-white;
       @apply p-2 rounded-full text-white;
       @apply flex items-center;
     }
@@ -99,6 +98,9 @@ export default defineComponent({
 
     &-title {
       @apply text-text text-lg font-medium;
+      @media (max-width: 1024px) {
+        @apply text-base;
+      }
     }
     &-content {
       @apply text-text-light text-base;
@@ -108,12 +110,22 @@ export default defineComponent({
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
+      @media (max-width: 1024px) {
+        @apply text-sm;
+      }
     }
     &-detail {
       @apply flex items-center justify-between;
 
+      @media (max-width: 1024px) {
+        @apply items-end;
+      }
       &-left {
         @apply flex items-center;
+
+        @media (max-width: 1024px) {
+          @apply flex-col items-start;
+        }
         &-item {
           @apply flex items-center;
 
@@ -123,6 +135,9 @@ export default defineComponent({
         }
         &-item + &-item {
           @apply ml-6;
+          @media (max-width: 1024px) {
+            @apply ml-0 mt-4;
+          }
         }
       }
       &-right {

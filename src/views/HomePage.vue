@@ -23,7 +23,11 @@
 .container
   HomeExplore
   HomePopular
-  HomeNews
+
+
+HomeNews
+
+
 </template>
 
 <script lang="ts">

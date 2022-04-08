@@ -151,7 +151,7 @@ export default defineComponent({
       }
 
       &-item {
-        @apply w-10 h-10 rounded-full bg-bg-icon;
+        @apply w-10 h-10 rounded-full bg-icons;
         @apply flex justify-center items-center;
         @apply cursor-pointer;
       }
@@ -165,7 +165,7 @@ export default defineComponent({
 
 .fb {
   &:hover {
-    @apply bg-primary-fb;
+    @apply bg-icons-fb;
 
   }
 }
@@ -178,12 +178,12 @@ export default defineComponent({
 }
 .youtube {
   &:hover {
-    @apply bg-bg-red;
+    @apply bg-icons-yt;
   }
 }
 .twitter {
   &:hover {
-    @apply bg-primary-twitter;
+    @apply bg-icons-twitter;
   }
 }
 

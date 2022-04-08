@@ -4,13 +4,12 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    ElButton: typeof import('element-plus/es')['ElButton']
     ElCol: typeof import('element-plus/es')['ElCol']
     ElImage: typeof import('element-plus/es')['ElImage']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElRow: typeof import('element-plus/es')['ElRow']
     ElSelect: typeof import('element-plus/es')['ElSelect']
-    ElTabPane: typeof import('element-plus/es')['ElTabPane']
-    ElTabs: typeof import('element-plus/es')['ElTabs']
     FooterComponent: typeof import('./src/components/FooterComponent.vue')['default']
     HomeCourse: typeof import('./src/components/HomePage/HomeCourse.vue')['default']
     HomeExplore: typeof import('./src/components/HomePage/HomeExplore.vue')['default']
@@ -18,7 +17,7 @@ declare module 'vue' {
     HomeHeader: typeof import('./src/components/HomePage/HomeHeader.vue')['default']
     HomeNews: typeof import('./src/components/HomePage/HomeNews.vue')['default']
     HomePopular: typeof import('./src/components/HomePage/HomePopular.vue')['default']
-    HomeRoute: typeof import('./src/components/HomePage/HomeRoute.vue')['default']
+    NewsContent: typeof import('./src/components/HomePage/NewsContent.vue')['default']
     SearchInput: typeof import('./src/components/SearchInput.vue')['default']
     SvgIcon: typeof import('./src/components/SvgIcon.vue')['default']
     TaiwanMap: typeof import('./src/components/HomePage/TaiwanMap.vue')['default']

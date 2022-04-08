@@ -14,6 +14,29 @@ const routes: Array<RouteRecordRaw> = [
       },
     ]
   },
+  {
+    path: "/sign",
+    name: RouterNames.signLayout,
+    component: () => import("@/layout/SignLayout.vue"),
+    children: [
+      {
+        path: "in",
+        name: RouterNames.signIn,
+        component: () => import("@/views/SignIn.vue"),
+      },
+      {
+        path: "up",
+        name: RouterNames.signUp,
+        component: () => import("@/views/SignUp.vue"),
+      },
+      {
+        path: "forgot-password",
+        name: RouterNames.forgotPassword,
+        component: () => import("@/views/ForgotPassword.vue"),
+      },
+    ]
+  },
+
 ];
 
 const router = createRouter({
