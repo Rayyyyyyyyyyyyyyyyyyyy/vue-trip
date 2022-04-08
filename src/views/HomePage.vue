@@ -1,5 +1,7 @@
 <template lang="pug">
 .landing-header
+  .latitude
+  .longitude
   .landing-header--search(
     data-aos="fade-zoom-in"
     data-aos-easing="ease-out"
@@ -24,14 +26,11 @@
   HomeExplore
   HomePopular
 
-
 HomeNews
-
-
 </template>
 
 <script lang="ts">
-import {defineComponent, onMounted} from "vue";
+import {defineComponent, onMounted, toRefs} from "vue";
 import HomeExplore from "@/components/HomePage/HomeExplore.vue";
 import HomePopular from "@/components/HomePage/HomePopular.vue";
 import SearchInput from "@/components/SearchInput.vue";
@@ -39,6 +38,8 @@ import AOS from "aos";
 import SvgIcon from "@/components/SvgIcon.vue";
 import TaiwanMap from "@/components/HomePage/TaiwanMap.vue";
 import HomeNews from "@/components/HomePage/HomeNews.vue";
+import {reactive} from "@vue/reactivity";
+import map from "@/store/map";
 
 export default defineComponent({
   name: "HomePage",
@@ -48,12 +49,17 @@ export default defineComponent({
     SearchInput,
     HomeExplore,
     HomePopular,
-    HomeNews
+    HomeNews,
   },
   props: {
 
   },
   setup(props) {
+
+    const state = reactive({
+
+    })
+
     onMounted(()=>{
       AOS.init()
     })
@@ -61,6 +67,7 @@ export default defineComponent({
 
 
     return {
+      ...toRefs(state)
     }
   }
 });

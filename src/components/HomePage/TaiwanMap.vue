@@ -318,6 +318,7 @@
 <script lang="ts">
 import {defineComponent, onMounted} from "vue";
 import AOS from "aos";
+import BaseApi from "@/services/api";
 
 export default defineComponent({
   name: "TaiwanMap",
@@ -328,11 +329,18 @@ export default defineComponent({
 
   },
   setup(props) {
+
+    const getWeather = async () => {
+      const result = await BaseApi.getWeatherData()
+      console.log("result", result)
+    }
+
     onMounted(()=>{
       AOS.init()
+      getWeather()
     })
 
-    //TODO: 氣象 api
+
 
     return {
     }
