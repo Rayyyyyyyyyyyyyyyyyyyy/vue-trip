@@ -46,7 +46,3 @@ module.exports = defineConfig({
     }
   },
 });
-// vue.config.js
-module.exports = {
-  publicPath: "/",
-};
