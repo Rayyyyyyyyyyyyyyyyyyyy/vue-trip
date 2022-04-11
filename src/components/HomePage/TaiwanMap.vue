@@ -325,17 +325,21 @@ export default defineComponent({
 
   },
   props: {
-    userLocal: {
-      type: String,
-
-    }
-
+    activePath: {
+      type: String
+    },
   },
   setup(props) {
     const state = reactive({
 
     });
+    console.log("activePath", props.activePath)
 
+    console.log("(document.querySelector(\"path\") as SVGElement)", (document.getElementsByTagName("path") as any))
+    // console.log("(document.querySelector(\"path\")", (document.querySelector("path") as SVGElement).hasAttribute("data-name-zh"))
+
+
+    // console.log("(document.querySelector(\"path\")", (document.querySelector("path") as SVGElement).getAttribute("data-name-zh"))
 
 
 

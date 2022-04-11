@@ -8,3 +8,4 @@ export enum EApiPaths {
 
 }
 
+export const weatherIconRul = "https://www.cwb.gov.tw/V8/assets/img/weather_icons/weathers/svg_icon"
