@@ -1,7 +1,11 @@
 <template lang="pug">
 .landing-header
-  .latitude
-  .longitude
+  .landing-header--weather
+    .landing-header--weather-block
+      svg-icon(:name="weatherIcon" :width="100" :height="100")
+      .city {{ userLocation }}
+    .detail {{ weatherDetail }}
+
   .landing-header--search(
     data-aos="fade-zoom-in"
     data-aos-easing="ease-out"
@@ -39,7 +43,9 @@ import SvgIcon from "@/components/SvgIcon.vue";
 import TaiwanMap from "@/components/HomePage/TaiwanMap.vue";
 import HomeNews from "@/components/HomePage/HomeNews.vue";
 import {reactive} from "@vue/reactivity";
-import map from "@/store/map";
+import BaseApi from "@/services/api";
+import {ElMessage} from "element-plus";
+import {MAP_API_KEY} from "@/config";
 
 export default defineComponent({
   name: "HomePage",
@@ -55,14 +61,87 @@ export default defineComponent({
 
   },
   setup(props) {
-
     const state = reactive({
+      addressJSON: {} as any,
 
-    })
+      cityName: "",
+      areaName: "",
 
-    onMounted(()=>{
+      weatherCityArr: [] as any,
+
+
+      userLocation: "",
+      weatherDetail: "",
+      weatherIcon: "sun",
+      rainPercentage: "",
+      min: 0,
+      max: 0
+    });
+
+    const getWeather = async () => {
+      const result = await BaseApi.getWeatherData()
+      state.weatherCityArr = result.records.location
+    }
+
+    const getUserLocal = () => {
+      const userLocal = state.weatherCityArr.filter((_: any)=>{
+        return _.locationName == state.cityName
+      })[0]
+      state.userLocation = userLocal.locationName
+      getWeatherDetail(userLocal.weatherElement)
+    }
+
+    const getWeatherDetail = (cityWeather: any[]) => {
+      state.weatherDetail = cityWeather[0].time[0].parameter.parameterName
+      const weatherValue = cityWeather[0].time[0].parameter.parameterValue
+      state.rainPercentage = cityWeather[1].time[0].parameter.parameterName
+      state.min = cityWeather[2].time[0].parameter.parameterName
+      state.max = cityWeather[4].time[0].parameter.parameterName
+
+
+
+    }
+
+
+    onMounted(async ()=>{
       AOS.init()
+      await getWeather()
+      await navigator.geolocation.getCurrentPosition(localSuccess, (err)=>{
+        ElMessage.error(err.message);
+      })
+
     })
+
+    const localSuccess = async (position: any) => {
+      const latlng = position.coords.latitude + "," + position.coords.longitude
+      await getAddress(latlng)
+      await setCityArea()
+      await getUserLocal()
+    }
+
+    const getAddress = async (payload: string) => {
+      const result = await BaseApi.getAddress({
+        latlng: payload,
+        key: MAP_API_KEY!
+      })
+      state.addressJSON = result.results[7]
+    }
+
+    const setCityArea = () => {
+      const cityNameArr = Array.from(state.addressJSON.address_components[0].long_name)
+      cityNameArr.map((_: any, idx: number)=>{
+        if(_ == "台"){
+          cityNameArr[idx] = "臺"
+        }
+      })
+      state.cityName = (cityNameArr.join(""))
+      state.areaName = state.addressJSON.address_components[1].long_name
+    }
+
+
+
+
+
 
 
 
@@ -78,6 +157,26 @@ export default defineComponent({
   @apply h-screen w-screen relative;
   background: url("@/assets/images/banner/yilan-county.jpg") no-repeat;
   background-size: cover;
+
+  &--weather {
+    @apply absolute top-1/3 z-30 w-3/5;
+    left: 20%;
+    @apply flex flex-col items-end;
+
+    &-block {
+      @apply flex items-center mb-4 text-white;
+
+      .city {
+        @apply text-3xl ml-4;
+      }
+
+      .detail {
+
+      }
+    }
+
+
+  }
 
   &--search {
     @apply absolute top-1/2 z-30 w-3/5;

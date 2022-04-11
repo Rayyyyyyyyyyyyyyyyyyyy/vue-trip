@@ -317,13 +317,7 @@
 
 <script lang="ts">
 import {defineComponent, onMounted, toRefs} from "vue";
-import AOS from "aos";
-import BaseApi from "@/services/api";
-import map from "@/store/map";
-import axios from "axios";
-import {MAP_API_DOMAIN, MAP_API_KEY} from "@/config";
 import {reactive} from "@vue/reactivity";
-import {ElMessage} from "element-plus";
 
 export default defineComponent({
   name: "TaiwanMap",
@@ -331,66 +325,16 @@ export default defineComponent({
 
   },
   props: {
+    userLocal: {
+      type: String,
+
+    }
 
   },
   setup(props) {
     const state = reactive({
-      addressJSON: {} as any,
 
-      cityName: "",
-      areaName: "",
-
-      weatherCityArr: [] as any
     });
-
-    const getWeather = async () => {
-      const result = await BaseApi.getWeatherData()
-      state.weatherCityArr = result.records.location
-    }
-
-    const getUserLocal = () => {
-      const userLocal = state.weatherCityArr.filter((_: any)=>{
-        return _.locationName == state.cityName
-      })
-      console.log("userLocal", userLocal)
-    }
-
-
-    onMounted(async ()=>{
-      await getWeather()
-      await navigator.geolocation.getCurrentPosition(localSuccess, (err)=>{
-        ElMessage.error(err.message);
-      })
-
-    })
-
-    const localSuccess = async (position: any) => {
-      const latlng = position.coords.latitude + "," + position.coords.longitude
-      await getAddress(latlng)
-      await setCityArea()
-      await getUserLocal()
-    }
-
-    const getAddress = async (payload: string) => {
-      const result = await BaseApi.getAddress({
-        latlng: payload,
-        key: MAP_API_KEY!
-      })
-      state.addressJSON = result.results[7]
-    }
-
-    const setCityArea = () => {
-      const cityNameArr = Array.from(state.addressJSON.address_components[2].long_name)
-      cityNameArr.map((_: any, idx: number)=>{
-        if(_ == "台"){
-          cityNameArr[idx] = "臺"
-        }
-      })
-      state.cityName = (cityNameArr.join(""))
-      state.areaName = state.addressJSON.address_components[1].long_name
-    }
-
-
 
 
 
