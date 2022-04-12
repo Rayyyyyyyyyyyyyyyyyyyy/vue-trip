@@ -5,6 +5,7 @@
     data-name="圖層 1"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 595.28 841.89"
+    class="taiwan_map"
 >
     <defs />
     <title>taiwan.svg</title>
@@ -316,7 +317,6 @@
 <script lang="ts">
 import {defineComponent, onMounted, toRefs} from "vue";
 import {reactive} from "@vue/reactivity";
-import * as path from "path";
 
 export default defineComponent({
   name: "TaiwanMap",
@@ -330,30 +330,29 @@ export default defineComponent({
   },
   setup(props) {
     const state = reactive({
-      active_id: ""
-
+      active_id: "",
     });
     console.log("activePath", props.activePath)
 
     const paths = document.getElementsByTagName("path") as any
     const cityArray = Array.from(paths).filter((_: any)=>{
+      _.setAttribute("class", "taiwan_city")
       return _.dataset.nameZh != undefined
     })
 
     const findActiveCity = () => {
       cityArray.map((_: any)=>{
         if(_.dataset.nameZh == props.activePath){
-         state.active_id = _.id
+          const pathId = _.id.toString()
+          console.log("pathId", pathId)
+          state.active_id = pathId.replace("icon-taiwan_", "")
         }
       })
-      console.log("state.active_id", state.active_id)
     }
 
     const activePath = () => {
-      const path = (document.getElementById(state.active_id) as HTMLElement)
-      path.onclick = function() {
-         console.log('mouseover event trigger');
-       };
+      const path = document.getElementById(state.active_id)!
+      path.setAttribute("class", "active");
     }
 
 
@@ -362,10 +361,6 @@ export default defineComponent({
       await activePath()
 
     })
-
-
-
-
 
     return {
       ...toRefs(state),
@@ -392,7 +387,9 @@ svg{
     stroke-width: 7;
   }
 }
-
+.active {
+  fill: #4464be;
+}
 
 
 </style>

@@ -163,7 +163,7 @@ export default defineComponent({
         if(state.addressCity.indexOf(_) != -1){
           const start = state.addressCity.indexOf(_)
           const end = state.addressCity.indexOf(_) + _.length
-            const defaultCity = Array.from(state.addressCity.slice(start, end))
+          const defaultCity = Array.from(state.addressCity.slice(start, end))
           defaultCity.map((singleString: string, idx: number)=>{
             if(singleString == "台") {
               defaultCity[idx] = "臺"
