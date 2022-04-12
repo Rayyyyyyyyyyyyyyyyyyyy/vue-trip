@@ -1,8 +1,6 @@
 <template>
 
 <svg
-    data-aos="zoom-out-left"
-    data-aos-delay="1200"
     id="cf503461-00bd-459a-aeb5-062ebc913211"
     data-name="圖層 1"
     xmlns="http://www.w3.org/2000/svg"
@@ -318,6 +316,7 @@
 <script lang="ts">
 import {defineComponent, onMounted, toRefs} from "vue";
 import {reactive} from "@vue/reactivity";
+import * as path from "path";
 
 export default defineComponent({
   name: "TaiwanMap",
@@ -331,22 +330,45 @@ export default defineComponent({
   },
   setup(props) {
     const state = reactive({
+      active_id: ""
 
     });
     console.log("activePath", props.activePath)
 
-    console.log("(document.querySelector(\"path\") as SVGElement)", (document.getElementsByTagName("path") as any))
-    // console.log("(document.querySelector(\"path\")", (document.querySelector("path") as SVGElement).hasAttribute("data-name-zh"))
+    const paths = document.getElementsByTagName("path") as any
+    const cityArray = Array.from(paths).filter((_: any)=>{
+      return _.dataset.nameZh != undefined
+    })
+
+    const findActiveCity = () => {
+      cityArray.map((_: any)=>{
+        if(_.dataset.nameZh == props.activePath){
+         state.active_id = _.id
+        }
+      })
+      console.log("state.active_id", state.active_id)
+    }
+
+    const activePath = () => {
+      const path = (document.getElementById(state.active_id) as HTMLElement)
+      path.onclick = function() {
+         console.log('mouseover event trigger');
+       };
+    }
 
 
-    // console.log("(document.querySelector(\"path\")", (document.querySelector("path") as SVGElement).getAttribute("data-name-zh"))
+    onMounted(async ()=>{
+      await findActiveCity()
+      await activePath()
+
+    })
 
 
 
 
 
     return {
-      ...toRefs(state)
+      ...toRefs(state),
     }
   }
 });
@@ -361,13 +383,16 @@ svg{
     fill: #dcdcdc;
     transition: 0.5s;
     cursor: pointer;
+
+
   }
 
   path:hover {
     fill: #4464be;
     stroke-width: 7;
   }
-
 }
+
+
 
 </style>

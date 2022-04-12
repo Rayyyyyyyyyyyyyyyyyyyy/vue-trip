@@ -37,6 +37,7 @@
     .introduction--line
     .introduction--text Introduction
   .landing-header--taiwan(
+    data-aos="zoom-out-left"
     v-if="userLocation != ''"
   )
     TaiwanMap(:activePath="userLocation")
@@ -62,7 +63,7 @@ import {reactive} from "@vue/reactivity";
 import BaseApi from "@/services/api";
 import {ElMessage} from "element-plus";
 import {MAP_API_KEY} from "@/config";
-import {weatherIconRul} from "@/const/appConsts";
+import {city_name, weatherIconRul} from "@/const/appConsts";
 import dayjs from "dayjs";
 
 export default defineComponent({
@@ -80,10 +81,9 @@ export default defineComponent({
   },
   setup(props) {
     const state = reactive({
-      addressJSON: {} as any,
+      addressCity: "",
 
       cityName: "",
-      areaName: "",
 
       weatherCityArr: [] as any,
 
@@ -135,8 +135,6 @@ export default defineComponent({
 
     onMounted(async ()=>{
       AOS.init()
-      await getWeather()
-      await dateState()
       await navigator.geolocation.getCurrentPosition(localSuccess, (err)=>{
         ElMessage.error(err.message);
       })
@@ -147,6 +145,8 @@ export default defineComponent({
       const latlng = position.coords.latitude + "," + position.coords.longitude
       await getAddress(latlng)
       await setCityArea()
+      await getWeather()
+      await dateState()
       await getUserLocal()
     }
 
@@ -155,18 +155,25 @@ export default defineComponent({
         latlng: payload,
         key: MAP_API_KEY!
       })
-      state.addressJSON = result.results[7]
+      state.addressCity = result.plus_code.compound_code
     }
 
     const setCityArea = () => {
-      const cityNameArr = Array.from(state.addressJSON.address_components[0].long_name)
-      cityNameArr.map((_: any, idx: number)=>{
-        if(_ == "台"){
-          cityNameArr[idx] = "臺"
+      Object.keys(city_name).map((_: string)=>{
+        if(state.addressCity.indexOf(_) != -1){
+          const start = state.addressCity.indexOf(_)
+          const end = state.addressCity.indexOf(_) + _.length
+            const defaultCity = Array.from(state.addressCity.slice(start, end))
+          defaultCity.map((singleString: string, idx: number)=>{
+            if(singleString == "台") {
+              defaultCity[idx] = "臺"
+            }
+          })
+          console.log("defaultCity", defaultCity.join(""))
+          state.cityName = defaultCity.join("")
         }
       })
-      state.cityName = (cityNameArr.join(""))
-      state.areaName = state.addressJSON.address_components[1].long_name
+
     }
 
 
