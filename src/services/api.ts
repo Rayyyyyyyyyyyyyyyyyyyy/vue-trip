@@ -3,7 +3,7 @@ import { ElMessage } from "element-plus";
 import axios from "axios";
 import {
   API_DOMAIN,
-  MAP_API_DOMAIN,
+  MAP_API_DOMAIN, OPEN_DATA_API_DOMAIN,
   WEATHER_API_DOMAIN
 } from "@/config";
 import { StatusCodes } from "http-status-codes";
@@ -20,6 +20,10 @@ const axiosWeather = axios.create({
 });
 const axiosMap = axios.create({
   baseURL: MAP_API_DOMAIN,
+  timeout: 10000
+});
+const axiosOpenData = axios.create({
+  baseURL: OPEN_DATA_API_DOMAIN,
   timeout: 10000
 });
 
@@ -162,6 +166,22 @@ function getMapLocal<T>(url: string, data: Record<string, any> = {}): Promise<T>
   });
 }
 
+function getOpenData<T>(url: string, data: Record<string, any> = {}): Promise<T> {
+  return new Promise((resolve, reject) => {
+    axiosOpenData({
+      method: "get",
+      // url,
+      params: data
+    })
+      .then(res => {
+        resolve(res.data);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+}
+
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function put(url: string, data: Record<string, any>): Promise<any> {
@@ -210,6 +230,10 @@ const BaseApi = {
   getAddress(payload: GetMapLocal): Promise<any> {
     return getMapLocal("", payload);
   },
+
+  test(): Promise<any> {
+    return getOpenData("")
+  }
 
 
 };

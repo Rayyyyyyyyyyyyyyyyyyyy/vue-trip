@@ -40,7 +40,9 @@
     data-aos="zoom-out-left"
     v-if="userLocation != ''"
   )
-    TaiwanMap(:activePath="userLocation")
+    TaiwanMap(
+      @clickedCity="activeClicked"
+      :activePath="userLocation")
 
 
 .container
@@ -131,6 +133,9 @@ export default defineComponent({
         state.timeStatus = "night"
       }
     }
+    const test = async () => {
+      console.log(await BaseApi.test())
+    }
 
 
     onMounted(async ()=>{
@@ -138,6 +143,7 @@ export default defineComponent({
       await navigator.geolocation.getCurrentPosition(localSuccess, (err)=>{
         ElMessage.error(err.message);
       })
+      await test()
 
     })
 
@@ -169,13 +175,17 @@ export default defineComponent({
               defaultCity[idx] = "臺"
             }
           })
-          console.log("defaultCity", defaultCity.join(""))
           state.cityName = defaultCity.join("")
         }
       })
 
     }
 
+    const activeClicked = async (cityName: string) => {
+      state.userLocation = cityName
+      state.cityName = cityName
+      await getUserLocal()
+    }
 
 
 
@@ -185,7 +195,8 @@ export default defineComponent({
 
     return {
       ...toRefs(state),
-      weatherIconRul
+      weatherIconRul,
+      activeClicked
     }
   }
 });
@@ -199,7 +210,7 @@ export default defineComponent({
 
   &--weather {
     @apply absolute top-1/4 z-30 w-3/5;
-    left: 20%;
+    left: 10%;
     @apply flex flex-col items-end text-white;
 
     &-block {

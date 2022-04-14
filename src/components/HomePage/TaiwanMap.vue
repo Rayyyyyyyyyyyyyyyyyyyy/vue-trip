@@ -320,6 +320,7 @@ import {reactive} from "@vue/reactivity";
 
 export default defineComponent({
   name: "TaiwanMap",
+  emits: [ "clickedCity" ],
   components: {
 
   },
@@ -328,25 +329,28 @@ export default defineComponent({
       type: String
     },
   },
-  setup(props) {
+  setup(props, {emit}) {
     const state = reactive({
       active_id: "",
+      mapPathArr: [] as any[]
     });
     console.log("activePath", props.activePath)
 
     const paths = document.getElementsByTagName("path") as any
     const cityArray = Array.from(paths).filter((_: any)=>{
-      _.setAttribute("class", "taiwan_city")
       return _.dataset.nameZh != undefined
     })
 
-    const findActiveCity = () => {
+    const findTaiwanCity = () => {
       cityArray.map((_: any)=>{
+        state.mapPathArr.push((_.id).replace("icon-taiwan_", ""))
+
         if(_.dataset.nameZh == props.activePath){
           const pathId = _.id.toString()
           console.log("pathId", pathId)
           state.active_id = pathId.replace("icon-taiwan_", "")
         }
+
       })
     }
 
@@ -357,10 +361,27 @@ export default defineComponent({
 
 
     onMounted(async ()=>{
-      await findActiveCity()
+      await findTaiwanCity()
       await activePath()
-
+      await addEven()
     })
+
+
+    const addEven = () => {
+      state.mapPathArr.map((_)=>{
+        const dom = document.getElementById(_) as HTMLElement
+        dom.addEventListener("click",   pathClicked, false)
+      })
+    }
+    const removeEven = (dom: HTMLElement) => {
+      dom.removeEventListener("click",   pathClicked, false)
+
+    }
+    const pathClicked = (e: any) => {
+      const path = document.getElementById(state.active_id)!
+      path.removeAttribute("class");
+      emit("clickedCity", e.target.dataset.nameZh)
+    }
 
     return {
       ...toRefs(state),
@@ -388,7 +409,7 @@ svg{
   }
 }
 .active {
-  fill: #4464be;
+  fill: #46BEEB;
 }
 
 
