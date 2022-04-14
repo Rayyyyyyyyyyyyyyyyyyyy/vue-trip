@@ -1,19 +1,16 @@
 
 <template lang="pug">
 .header.home-header-style
-  svg-icon(name="header-logo" :width="160" :height="80" )
+  svg-icon(name="logo" :width="160" :height="80")
   .header_center
 
   .header_right
     svg-icon(
       @click="goSignUrl"
-      name="shopping-cart"
+      name="user"
       :width="32"
       :height="32"
       color="#fff" )
-    .profile-img
-      el-image(:src="require('@/assets/images/cat-robbit.jpeg')" alt="profileIMG" fit="cover" )
-
 
 
 
