@@ -42,16 +42,13 @@
 
           el-col(:span="first_card_span")
             TripCard(
-              :trip_content="card_one.description"
-              :trip_title="card_one.actName"
-              :trip_local="card_one.cityName"
-              :imgUrl="card_one.imageUrl")
+              @card_clicked="clickedFun"
+              :card_data="card_one")
+
           el-col(:span="sec_card_span")
             TripCard(
-              :trip_content="card_two.description"
-              :trip_title="card_two.actName"
-              :trip_local="card_two.cityName"
-              :imgUrl="card_two.imageUrl")
+              @card_clicked="clickedFun"
+              :card_data="card_two")
 
 
         el-row(
@@ -65,20 +62,17 @@
 
           el-col(:span="first_card_span")
             TripCard(
-              :trip_content="card_three.description"
-              :trip_title="card_three.actName"
-              :trip_local="card_three.cityName"
-              :imgUrl="card_three.imageUrl")
+              @card_clicked="clickedFun"
+              :card_data="card_three")
 
           el-col(:span="sec_card_span")
             TripCard(
-              :trip_content="card_fore.description"
-              :trip_title="card_fore.actName"
-              :trip_local="card_fore.cityName"
-              :imgUrl="card_fore.imageUrl")
+              @card_clicked="clickedFun"
+              :card_data="card_fore")
 
 
         el-button.btn.mt-10(
+          @click="goMoreUrl"
           data-aos="zoom-in"
           type="info"
           plain
@@ -156,10 +150,19 @@ export default defineComponent({
       getPopularData()
     })
 
+    const clickedFun = (data: any) => {
+      console.log("data", data)
+    }
+
+    const goMoreUrl = () => {
+
+    }
+
 
     return {
       ...toRefs(state),
-
+      clickedFun,
+      goMoreUrl
     }
   }
 });

@@ -1,17 +1,17 @@
 <template lang="pug">
 .trip-card
-  .trip-card--img
-    img(:src=`"https://cloud.culture.tw/" + imgUrl`)
+  .trip-card--img(@click="cardClicked")
+    img(:src=`"https://cloud.culture.tw/" + card_data.imageUrl`)
   .trip-card--img-alt
     svg-icon(name="location" color="#1877f2")
-    .item-text {{ trip_local }}
+    .item-text {{ card_data.cityName }}
   .trip-card--body
     .trip-card--body-value
-      .trip-card--body-title {{ trip_title }}
-      .trip-card--body-content {{ trip_content }}
+      .trip-card--body-title {{ card_data.actName }}
+      .trip-card--body-content {{ card_data.description }}
 
     .trip-card--footer
-      p 詳細 >
+      p(@click="cardClicked") 詳細 >
 
 
 
@@ -29,34 +29,26 @@ import AOS from "aos";
 
 export default defineComponent({
   name: "TripCard",
+  emits: ["card_clicked"],
   props: {
-    imgUrl: {
-      type: String,
-      default: "/e_new_upload/task/a66dc343-cd8b-4ee0-a265-8d7fff520c3b/C2_315080000H_080758/eb67f84234d1581790e6d5ee8869c8344ba89d84.jpg"
-    },
-    trip_local: {
-      type: String,
-      default: "Taipei"
-    },
-    trip_title: {
-      type: String,
-      default: "Taipei"
-    },
-    trip_content: {
-      type: String,
-      default: "Taipei"
-    },
+    card_data: {
+      type: Object
+    }
   },
-  setup(props) {
+  setup(props, {emit}) {
 
     onMounted(()=>{
       AOS.init()
     })
+    const cardClicked = () => {
+      emit("card_clicked", props.card_data)
+    }
 
 
 
 
     return {
+      cardClicked
     }
   }
 });

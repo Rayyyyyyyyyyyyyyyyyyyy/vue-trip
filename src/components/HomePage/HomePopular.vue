@@ -7,32 +7,28 @@
       data-aos="fade-left"
       data-aos-delay="500")
       TripCard(
-        :trip_content="card_one.description"
-        :trip_title="card_one.actName"
-        :trip_local="card_one.cityName"
-        :imgUrl="card_one.imageUrl")
+        @card_clicked="clickedFun"
+        :card_data="card_one")
 
     el-col(:span="sec_card_span"
       data-aos="fade-left"
       data-aos-delay="600")
       TripCard(
-        :trip_content="card_two.description"
-        :trip_title="card_two.actName"
-        :trip_local="card_two.cityName"
-        :imgUrl="card_two.imageUrl")
+        @card_clicked="clickedFun"
+        :card_data="card_two")
 
     el-col(:span="third_card_span"
       data-aos="fade-left"
       data-aos-delay="700")
       TripCard(
-        :trip_content="card_three.description"
-        :trip_title="card_three.actName"
-        :trip_local="card_three.cityName"
-        :imgUrl="card_three.imageUrl")
+        @card_clicked="clickedFun"
+        :card_data="card_three")
 
   el-button.btn.more-btn(
+    @click="goMoreUrl"
     data-aos="zoom-in"
-    type="info" plain
+    type="info"
+    plain
     size="large") 更多
 
 
@@ -112,9 +108,18 @@ export default defineComponent({
 
     })
 
+    const clickedFun = (data: any) => {
+      console.log("data", data)
+    }
+
+    const goMoreUrl = () => {
+
+    }
 
     return {
       ...toRefs(state),
+      clickedFun,
+      goMoreUrl
     }
   }
 });
