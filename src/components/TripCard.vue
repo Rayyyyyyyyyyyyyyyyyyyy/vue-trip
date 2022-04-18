@@ -10,7 +10,8 @@
       .trip-card--body-title {{ trip_title }}
       .trip-card--body-content {{ trip_content }}
 
-    .trip-card--footer 詳細 >
+    .trip-card--footer
+      p 詳細 >
 
 
 
@@ -135,8 +136,15 @@ export default defineComponent({
 
   &--footer {
     @apply flex items-end justify-end;
-    @apply text-primary cursor-pointer;
     @apply flex-1;
+
+    p {
+      @apply text-primary cursor-pointer;
+
+      &:hover {
+        @apply text-primary-light;
+      }
+    }
   }
 }
 

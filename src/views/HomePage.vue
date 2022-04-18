@@ -60,6 +60,7 @@ import {ElMessage} from "element-plus";
 import {MAP_API_KEY} from "@/config";
 import {city_name, weatherIconRul} from "@/const/appConsts";
 import dayjs from "dayjs";
+import getRandomInt from "@/utils/getRandom";
 
 export default defineComponent({
   name: "HomePage",
@@ -177,22 +178,15 @@ export default defineComponent({
 
     const changeBg = async (city_name: string) => {
       const activity = await require("@/assets/jsonData/activity.json")
-
       const headerClassName = "landing-header"
       const bgClassName = "landing-header-bg"
-
       const landingHeaderDom = document.getElementsByClassName(headerClassName)[0] as HTMLElement
       landingHeaderDom.classList.remove(bgClassName)
       const city = activity.filter((_: any)=>{
-        return  _.cityName.includes(city_name) == true
+        return  _.cityName.includes(city_name) == true && _.imageUrl != null
       })
-      // console.log("city", city)
       const defaultUrl = "https://cloud.culture.tw"
-      if(city[0].imageUrl){
-        landingHeaderDom.style.background = `url(${defaultUrl}${city[0].imageUrl}) no-repeat`
-      }else{
-        landingHeaderDom.style.background = `url(${defaultUrl}${city[1].imageUrl}) no-repeat`
-      }
+      landingHeaderDom.style.background = `url(${defaultUrl}${city[getRandomInt(city.length)].imageUrl}) no-repeat`
       landingHeaderDom.style.backgroundSize = "cover"
 
     }
@@ -220,11 +214,12 @@ export default defineComponent({
 
 
   &--weather {
-    @apply absolute top-2/3 z-30;
+    @apply absolute z-30;
     @apply flex flex-col items-end text-white;
     @apply bg-secondary/50 shadow-xl rounded-lg;
     @apply py-6 px-10;
     left: 15%;
+    top: 10%;
 
 
     &-block {
