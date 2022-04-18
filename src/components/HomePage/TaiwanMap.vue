@@ -315,7 +315,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, onMounted, toRefs} from "vue";
+import {defineComponent, onMounted, toRefs, watch} from "vue";
 import {reactive} from "@vue/reactivity";
 
 export default defineComponent({
@@ -334,7 +334,12 @@ export default defineComponent({
       active_id: "",
       mapPathArr: [] as any[]
     });
-    console.log("activePath", props.activePath)
+
+    watch(()=> props.activePath, async ()=>{
+      // console.log("activePath", props.activePath)
+      await findTaiwanCity()
+      await activePath()
+    })
 
     const paths = document.getElementsByTagName("path") as any
     const cityArray = Array.from(paths).filter((_: any)=>{
@@ -409,7 +414,7 @@ svg{
   }
 }
 .active {
-  fill: #46BEEB;
+  fill: #4464be;
 }
 
 
