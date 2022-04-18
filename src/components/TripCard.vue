@@ -1,30 +1,17 @@
 <template lang="pug">
 .trip-card
   .trip-card--img
-    img(:src="imgUrl")
+    img(:src=`"https://cloud.culture.tw/" + imgUrl`)
   .trip-card--img-alt
     svg-icon(name="location" color="#1877f2")
-    .item-text 台北市
+    .item-text {{ trip_local }}
   .trip-card--body
-    .trip-card--body-title 萬華區剝皮寮亂亂逛
-    .trip-card--body-content 萬華區剝皮寮亂亂逛萬華區剝皮寮亂亂逛萬華區剝皮寮亂亂逛萬華區剝皮寮亂亂逛萬華區剝皮寮亂亂逛萬華區剝皮寮亂亂逛萬華區剝皮寮亂亂逛萬華區剝皮寮亂亂逛萬華區剝皮寮亂亂逛萬華區剝皮寮亂亂逛萬華區剝皮寮亂亂逛萬華區剝皮寮亂亂逛萬華區剝皮寮亂亂逛萬華區剝皮寮亂亂逛萬華區剝皮寮亂亂逛萬華區剝皮寮亂亂逛萬華區剝皮寮亂亂逛萬華區剝皮寮亂亂逛萬華區剝皮寮亂亂逛萬華區剝皮寮亂亂逛
-    .trip-card--body-detail
-      .trip-card--body-detail-left
-        .trip-card--body-detail-left-item
-          svg-icon(name="group")
-          .item-text 200
-        .trip-card--body-detail-left-item
-          svg-icon(name="calendar")
-          .item-text 200 天
-      .trip-card--body-detail-right 詳細 >
+    .trip-card--body-value
+      .trip-card--body-title {{ trip_title }}
+      .trip-card--body-content {{ trip_content }}
 
-  .trip-card--footer
-    .trip-card--footer-item
-      svg-icon(name="heart-smile")
-      .item-text 200
-    .trip-card--footer-item
-      svg-icon(name="bookmark")
-      .item-text 200
+    .trip-card--footer 詳細 >
+
 
 
 
@@ -44,7 +31,20 @@ export default defineComponent({
   props: {
     imgUrl: {
       type: String,
-    }
+      default: "/e_new_upload/task/a66dc343-cd8b-4ee0-a265-8d7fff520c3b/C2_315080000H_080758/eb67f84234d1581790e6d5ee8869c8344ba89d84.jpg"
+    },
+    trip_local: {
+      type: String,
+      default: "Taipei"
+    },
+    trip_title: {
+      type: String,
+      default: "Taipei"
+    },
+    trip_content: {
+      type: String,
+      default: "Taipei"
+    },
   },
   setup(props) {
 
@@ -64,6 +64,9 @@ export default defineComponent({
 <style lang="scss" scoped>
 .item-text {
   @apply ml-2 text-sm font-bold;
+  @media (max-width: 375px) {
+    @apply text-xs;
+  }
 }
 
 .trip-card {
@@ -72,11 +75,13 @@ export default defineComponent({
   @apply z-30;
 
   &--img {
-    @apply z-20;
-    @apply overflow-hidden;
+    @apply z-20 w-full overflow-hidden;
+    height: 220px;
+
 
     img{
-      @apply rounded-t-lg cursor-pointer;
+      @apply rounded-t-lg cursor-pointer w-full h-full;
+      object-fit: cover;
       &:hover {
         transition: .5s;
         transform: scale(1.2);
@@ -94,71 +99,44 @@ export default defineComponent({
 
   &--body {
     @apply p-4 bg-white ;
-    @apply border-b-2;
+    @apply rounded-b-xl;
+    @apply flex flex-col justify-between;
+
+    &-value {
+      @apply flex-1;
+    }
+
 
     &-title {
       @apply text-text text-lg font-medium;
+      @apply flex-1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+
       @media (max-width: 1024px) {
         @apply text-base;
       }
     }
     &-content {
-      @apply text-text-light text-base;
-      @apply mt-2 mb-6;
+      @apply text-text-light text-sm;
+      @apply mt-2 mb-6 flex-1 h-10;
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
-      -webkit-line-clamp: 2;
+      -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
-      @media (max-width: 1024px) {
-        @apply text-sm;
-      }
+
     }
-    &-detail {
-      @apply flex items-center justify-between;
 
-      @media (max-width: 1024px) {
-        @apply items-end;
-      }
-      &-left {
-        @apply flex items-center;
-
-        @media (max-width: 1024px) {
-          @apply flex-col items-start;
-        }
-        &-item {
-          @apply flex items-center;
-
-          svg {
-            @apply cursor-pointer;
-          }
-        }
-        &-item + &-item {
-          @apply ml-6;
-          @media (max-width: 1024px) {
-            @apply ml-0 mt-4;
-          }
-        }
-      }
-      &-right {
-        @apply text-primary-light text-sm cursor-pointer;
-      }
-    }
   }
 
   &--footer {
-    @apply p-4 bg-white rounded-b-lg;
-    @apply flex items-center;
-
-    &-item {
-      @apply flex-1 flex items-center justify-center;
-      svg {
-        @apply mr-6 cursor-pointer;
-      }
-    }
-    &-item + &-item {
-      @apply border-l-2;
-    }
+    @apply flex items-end justify-end;
+    @apply text-primary cursor-pointer;
+    @apply flex-1;
   }
 }
 

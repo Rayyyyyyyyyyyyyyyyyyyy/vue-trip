@@ -54,8 +54,6 @@ export default defineComponent({
   @apply w-screen h-screen;
   @apply flex items-center;
   @apply p-24;
-  background: url("@/assets/images/sign-up.jpg") no-repeat;
-  background-size: cover;
 
 
   &-card {

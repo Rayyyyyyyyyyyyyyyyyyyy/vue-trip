@@ -1,15 +1,15 @@
 
 <template lang="pug">
 .header.home-header-style
-  svg-icon(name="logo" :width="160" :height="80")
+  svg-icon(name="logo" :width="80" :height="80")
   .header_center
 
   .header_right
     svg-icon(
-      @click="goSignUrl"
+      @click="goUserUrl"
       name="user"
-      :width="32"
-      :height="32"
+      :width="36"
+      :height="36"
       color="#fff" )
 
 
@@ -36,16 +36,16 @@ export default defineComponent({
 
     const router = useRouter()
 
-    const goSignUrl = () => {
+    const goUserUrl = () => {
       router.push({
-        name: RouterNames.signUp
+        name: RouterNames.home
       })
     }
 
 
 
     return {
-      goSignUrl
+      goUserUrl
     }
   }
 });
@@ -56,7 +56,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .header {
-  @apply h-24 px-6;
+  @apply h-24 px-6 py-4;
   @apply flex items-center justify-between;
   &_center {
     @apply flex-1;
@@ -66,7 +66,6 @@ export default defineComponent({
   &_right {
     @apply border-l-2 border-white pl-6;
     @apply flex items-center justify-around;
-    width: 10%;
     .btn{
       @apply w-full bg-transparent text-white border-transparent;
     }

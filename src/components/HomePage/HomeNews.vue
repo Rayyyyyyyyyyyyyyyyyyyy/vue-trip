@@ -37,12 +37,22 @@
           data-aos-duration="900"
           data-aos-delay="800"
           data-aos-offset="200"
+          justify="center"
           :gutter="20")
 
-          el-col(:span="12")
-            TripCard(:imgUrl="testImg")
-          el-col(:span="12")
-            TripCard.mb-10(:imgUrl="testImg")
+          el-col(:span="first_card_span")
+            TripCard(
+              :trip_content="card_one.description"
+              :trip_title="card_one.actName"
+              :trip_local="card_one.cityName"
+              :imgUrl="card_one.imageUrl")
+          el-col(:span="sec_card_span")
+            TripCard(
+              :trip_content="card_two.description"
+              :trip_title="card_two.actName"
+              :trip_local="card_two.cityName"
+              :imgUrl="card_two.imageUrl")
+
 
         el-row(
           data-aos="fade-zoom-in"
@@ -50,14 +60,25 @@
           data-aos-duration="900"
           data-aos-delay="800"
           data-aos-offset="200"
+          justify="center"
           :gutter="20")
 
-          el-col(:span="12")
-            TripCard(:imgUrl="testImg")
-          el-col(:span="12")
-            TripCard.mb-10(:imgUrl="testImg")
+          el-col(:span="first_card_span")
+            TripCard(
+              :trip_content="card_three.description"
+              :trip_title="card_three.actName"
+              :trip_local="card_three.cityName"
+              :imgUrl="card_three.imageUrl")
 
-        el-button.btn(
+          el-col(:span="sec_card_span")
+            TripCard(
+              :trip_content="card_fore.description"
+              :trip_title="card_fore.actName"
+              :trip_local="card_fore.cityName"
+              :imgUrl="card_fore.imageUrl")
+
+
+        el-button.btn.mt-10(
           data-aos="zoom-in"
           type="info"
           plain
@@ -73,12 +94,13 @@
 </template>
 <script lang="ts">
 
-import {defineComponent, onMounted} from "vue";
+import {defineComponent, onMounted, toRefs} from "vue";
 import AOS from "aos";
 import NewsContent from "@/components/HomePage/NewsContent.vue";
-import testImg from "@/assets/images/banner/yilan-county.jpg"
 import TripCard from "@/components/TripCard.vue";
 import SvgIcon from "@/components/SvgIcon.vue";
+import {reactive} from "@vue/reactivity";
+import getRandomInt from "@/utils/getRandom";
 
 export default defineComponent({
   name: "HomeNews",
@@ -91,16 +113,53 @@ export default defineComponent({
 
   },
   setup(props) {
+    const state = reactive({
+      first_card_span: 12,
+      sec_card_span: 12,
 
-    onMounted(()=>{
-      AOS.init()
+      card_one: {} as any,
+      card_two: {} as any,
+      card_three: {} as any,
+      card_fore: {} as any,
+    })
+    const setSpan = () => {
+      if(window.innerWidth > 1024){
+        state.first_card_span = 12
+        state.sec_card_span = 12
+      }else{
+        state.first_card_span = 16
+        state.sec_card_span = 0
+
+      }
+    }
+
+    window.addEventListener("resize", ()=>{
+      console.log(window.innerWidth)
+      setSpan()
     })
 
 
+    const getPopularData = async () => {
+      const activity = await require("@/assets/jsonData/activity.json")
+      // console.log("activity", activity)
+      activity.map((_: any)=>{
+        state.card_one = activity[getRandomInt(activity.length + 1)]
+        state.card_two = activity[getRandomInt(activity.length + 1)]
+        state.card_three = activity[getRandomInt(activity.length + 1)]
+        state.card_fore = activity[getRandomInt(activity.length + 1)]
+      })
+    }
+
+    onMounted(()=>{
+      AOS.init()
+      setSpan()
+      getPopularData()
+    })
 
 
     return {
-      testImg
+      ...toRefs(state),
+
     }
   }
 });
@@ -144,7 +203,7 @@ export default defineComponent({
     &-left {
       @apply flex-1 h-1/2 bg-bg-light/50 w-full;
       @apply flex items-center justify-center;
-      transform: scale(2);
+      transform: scale(1.5);
     }
     &-right {
       @apply flex-1 p-6;
@@ -158,9 +217,13 @@ export default defineComponent({
       }
     }
     &-cards {
-      @apply w-10/12 flex flex-col items-center justify-center;
+      @apply w-full flex flex-col items-center justify-center;
     }
   }
 
+}
+
+.el-row + .el-row {
+  @apply mt-10;
 }
 </style>

@@ -231,9 +231,6 @@ const BaseApi = {
     return getMapLocal("", payload);
   },
 
-  test(): Promise<any> {
-    return getOpenData("")
-  }
 
 
 };

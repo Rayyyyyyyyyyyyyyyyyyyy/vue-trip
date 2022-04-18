@@ -2,9 +2,8 @@ const _RouterNames = {
   homeLayout: "homeLayout",
   home: "home",
   signLayout: "signLayout",
-  signIn: "signIn",
-  signUp: "signUp",
-  forgotPassword: "forgotPassword"
+
+  page404: "page404"
 
 };
 

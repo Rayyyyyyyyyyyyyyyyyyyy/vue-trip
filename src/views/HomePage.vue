@@ -1,7 +1,7 @@
 <template lang="pug">
-.landing-header
+.landing-header.landing-header-bg
   .landing-header--weather(
-    v-if="userLocation != ''"
+    v-if="cityName != ''"
     data-aos-easing="ease-out"
     data-aos-duration="900"
     data-aos-delay="1000")
@@ -11,7 +11,7 @@
         :src=`weatherIconRul+"/"+timeStatus+"/"+weatherValue + ".svg"` alt="")
       .city(
         data-aos="fade-left"
-      ) {{ userLocation }}
+      ) {{ cityName }}
     .detail(
       data-aos="fade-up"
     ) {{ weatherDetail }}
@@ -19,15 +19,6 @@
       .detail-weather
         p {{ min }}°C - {{ max }}°C
 
-
-  .landing-header--search(
-    data-aos="fade-zoom-in"
-    data-aos-easing="ease-out"
-    data-aos-duration="900"
-    data-aos-delay="1300"
-    )
-    .landing-header--search-title 近在咫尺的美
-    SearchInput
   .landing-header--bottomArrow
     .landing-header--bottomArrow-item
     .landing-header--bottomArrow-item
@@ -38,11 +29,11 @@
     .introduction--text Introduction
   .landing-header--taiwan(
     data-aos="zoom-out-left"
-    v-if="userLocation != ''"
+    v-if="cityName != ''"
   )
     TaiwanMap(
       @clickedCity="activeClicked"
-      :activePath="userLocation")
+      :activePath="cityName")
 
 
 .container
@@ -50,6 +41,8 @@
   HomePopular
 
 HomeNews
+
+
 </template>
 
 <script lang="ts">
@@ -90,8 +83,7 @@ export default defineComponent({
       weatherCityArr: [] as any,
 
 
-      userLocation: "",
-      weatherValue: "",
+      weatherValue: "01",
       weatherDetail: "",
       weatherIcon: "sun",
       rainPercentage: "",
@@ -109,7 +101,6 @@ export default defineComponent({
       const userLocal = state.weatherCityArr.filter((_: any)=>{
         return _.locationName == state.cityName
       })[0]
-      state.userLocation = userLocal.locationName
       getWeatherDetail(userLocal.weatherElement)
     }
 
@@ -133,9 +124,7 @@ export default defineComponent({
         state.timeStatus = "night"
       }
     }
-    const test = async () => {
-      console.log(await BaseApi.test())
-    }
+
 
 
     onMounted(async ()=>{
@@ -143,7 +132,6 @@ export default defineComponent({
       await navigator.geolocation.getCurrentPosition(localSuccess, (err)=>{
         ElMessage.error(err.message);
       })
-      await test()
 
     })
 
@@ -182,12 +170,32 @@ export default defineComponent({
     }
 
     const activeClicked = async (cityName: string) => {
-      state.userLocation = cityName
       state.cityName = cityName
       await getUserLocal()
+      await changeBg(cityName)
     }
 
+    const changeBg = async (city_name: string) => {
+      const activity = await require("@/assets/jsonData/activity.json")
 
+      const headerClassName = "landing-header"
+      const bgClassName = "landing-header-bg"
+
+      const landingHeaderDom = document.getElementsByClassName(headerClassName)[0] as HTMLElement
+      landingHeaderDom.classList.remove(bgClassName)
+      const city = activity.filter((_: any)=>{
+        return  _.cityName.includes(city_name) == true
+      })
+      // console.log("city", city)
+      const defaultUrl = "https://cloud.culture.tw"
+      if(city[0].imageUrl){
+        landingHeaderDom.style.background = `url(${defaultUrl}${city[0].imageUrl}) no-repeat`
+      }else{
+        landingHeaderDom.style.background = `url(${defaultUrl}${city[1].imageUrl}) no-repeat`
+      }
+      landingHeaderDom.style.backgroundSize = "cover"
+
+    }
 
 
 
@@ -203,15 +211,21 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.landing-header {
-  @apply h-screen w-screen relative;
+.landing-header-bg {
   background: url("@/assets/images/sign-up.jpg") no-repeat;
   background-size: cover;
+}
+.landing-header {
+  @apply h-screen w-screen relative;
+
 
   &--weather {
-    @apply absolute top-1/4 z-30 w-3/5;
-    left: 10%;
+    @apply absolute top-2/3 z-30;
     @apply flex flex-col items-end text-white;
+    @apply bg-secondary/50 shadow-xl rounded-lg;
+    @apply py-6 px-10;
+    left: 15%;
+
 
     &-block {
       @apply flex items-center mb-4;

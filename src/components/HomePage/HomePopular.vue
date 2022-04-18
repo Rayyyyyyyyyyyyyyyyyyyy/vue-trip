@@ -3,18 +3,32 @@
   .popular--bg
   .page-title.popular--title 熱門行程
   el-row(:gutter="20").popular--row
-    el-col(:span="8"
+    el-col(:span="first_card_span"
       data-aos="fade-left"
       data-aos-delay="500")
-      TripCard(:imgUrl="testImg")
-    el-col(:span="8"
+      TripCard(
+        :trip_content="card_one.description"
+        :trip_title="card_one.actName"
+        :trip_local="card_one.cityName"
+        :imgUrl="card_one.imageUrl")
+
+    el-col(:span="sec_card_span"
       data-aos="fade-left"
       data-aos-delay="600")
-      TripCard(:imgUrl="testImg")
-    el-col(:span="8"
+      TripCard(
+        :trip_content="card_two.description"
+        :trip_title="card_two.actName"
+        :trip_local="card_two.cityName"
+        :imgUrl="card_two.imageUrl")
+
+    el-col(:span="third_card_span"
       data-aos="fade-left"
       data-aos-delay="700")
-      TripCard(:imgUrl="testImg")
+      TripCard(
+        :trip_content="card_three.description"
+        :trip_title="card_three.actName"
+        :trip_local="card_three.cityName"
+        :imgUrl="card_three.imageUrl")
 
   el-button.btn.more-btn(
     data-aos="zoom-in"
@@ -28,10 +42,11 @@
 
 </template>
 <script lang="ts">
-import {defineComponent, onMounted} from "vue";
+import { defineComponent, onMounted, toRefs, watch} from "vue";
 import AOS from "aos";
 import TripCard from "@/components/TripCard.vue";
-import testImg from "@/assets/images/banner/yilan-county.jpg"
+import {reactive} from "@vue/reactivity";
+import getRandomInt from "@/utils/getRandom";
 
 export default defineComponent({
   name: "HomeGroup",
@@ -41,17 +56,65 @@ export default defineComponent({
   props: {
 
 
-
   },
   setup(props) {
+    const state = reactive({
+      first_card_span: 8,
+      sec_card_span: 8,
+      third_card_span: 8,
+
+
+      card_one: {} as any,
+      card_two: {} as any,
+      card_three: {} as any,
+    })
+
+    const setSpan = () => {
+      if(window.innerWidth > 768){
+        state.first_card_span = 8
+        state.sec_card_span = 8
+        state.third_card_span = 8
+      }else{
+        state.first_card_span = 12
+        state.sec_card_span = 12
+        state.third_card_span = 0
+
+        if(window.innerWidth <= 375){
+          state.first_card_span = 24
+          state.sec_card_span = 0
+          state.third_card_span = 0
+
+        }
+      }
+
+    }
+    window.addEventListener("resize", ()=>{
+      console.log(window.innerWidth)
+      setSpan()
+    })
+
+
+
+    const getPopularData = async () => {
+      const activity = await require("@/assets/jsonData/activity.json")
+      // console.log("activity", activity)
+      activity.map((_: any)=>{
+        state.card_one = activity[getRandomInt(activity.length + 1)]
+        state.card_two = activity[getRandomInt(activity.length + 1)]
+        state.card_three = activity[getRandomInt(activity.length + 1)]
+      })
+    }
 
     onMounted(()=>{
       AOS.init()
+      setSpan()
+      getPopularData()
+
     })
 
 
     return {
-      testImg
+      ...toRefs(state),
     }
   }
 });
@@ -60,7 +123,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .popular {
   @apply py-10 w-full relative my-6;
-  min-height: 650px;
+  min-height: 570px;
 
   &--bg {
     @apply h-3/4 w-screen bg-primary-light/20;
@@ -80,8 +143,8 @@ export default defineComponent({
   }
 
   &--row {
-    @apply absolute ;
-    @apply top-24 z-30;
+    @apply absolute w-full;
+    @apply top-24 z-30 left-24;
 
   }
 
