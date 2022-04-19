@@ -206,7 +206,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .landing-header-bg {
-  background: url("@/assets/images/sign-up.jpg") no-repeat;
+  background: url("@/assets/images/taipei101.jpg") no-repeat;
   background-size: cover;
 }
 .landing-header {

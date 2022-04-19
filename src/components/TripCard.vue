@@ -3,7 +3,7 @@
   .trip-card--img(@click="cardClicked")
     img(:src="defaultImgUrl + card_data.imageUrl")
   .trip-card--img-alt
-    svg-icon(name="location" color="#1877f2")
+    svg-icon(name="location" color="#0b4fa7")
     .item-text {{ card_data.cityName }}
   .trip-card--body
     .trip-card--body-value
@@ -86,7 +86,7 @@ export default defineComponent({
     &-alt {
       @apply absolute left-0 z-30;
       top: -20px;
-      @apply bg-icons-twitter/50 text-white;
+      @apply bg-icons-twitter/70 text-white;
       @apply p-2 rounded-full text-white;
       @apply flex items-center;
     }

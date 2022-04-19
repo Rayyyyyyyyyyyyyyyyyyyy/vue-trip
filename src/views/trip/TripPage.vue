@@ -3,7 +3,9 @@
   Header
 
   .container
-    BackBtn
+    BackBtn(
+    @backClickedEmit="goBackUrl"
+    )
     .card
       .trip-page-header
         img(:src="defaultImgUrl + tripData.imageUrl" alt="")
@@ -19,7 +21,7 @@
 
       GMapMap(
       :center="center"
-      :zoom="7"
+      :zoom="15"
       map-type-id="terrain")
 
 
@@ -38,6 +40,8 @@ import Header from "@/components/HomePage/Header.vue";
 import BackBtn from "@/components/BackBtn.vue";
 import BaseApi from "@/services/api";
 import {MAP_API_KEY} from "@/config";
+import router from "@/router";
+import RouterNames from "@/router/name";
 
 export default defineComponent({
   name: "TripPage",
@@ -77,10 +81,17 @@ export default defineComponent({
       getTripData()
     })
 
+    const goBackUrl = () => {
+      router.push({
+        name: RouterNames.home
+      })
+    }
+
 
     return {
       ...toRefs(state),
       defaultImgUrl,
+      goBackUrl
 
     }
   }

@@ -3,7 +3,7 @@
   svg-icon.mr-2(name="arrow-left")
   el-button.btn(
   type="text"
-    @click="$router.back()"
+    @click="backClicked"
   ) {{ back_text }}
 </template>
 <script lang="ts">
@@ -13,9 +13,11 @@ import AOS from "aos";
 import TripCard from "@/components/TripCard.vue";
 import {reactive} from "@vue/reactivity";
 import SvgIcon from "@/components/SvgIcon.vue";
+import router from "@/router";
 
 export default defineComponent({
   name: "BackBtn",
+  emits:["backClickedEmit"],
   components: {
 
   },
@@ -26,14 +28,18 @@ export default defineComponent({
     }
 
   },
-  setup(props) {
+  setup(props, {emit}) {
     const state = reactive({
     })
 
+    const backClicked = () => {
+      emit("backClickedEmit")
+    }
 
 
     return {
-      ...toRefs(state)
+      ...toRefs(state),
+      backClicked
     }
   }
 });

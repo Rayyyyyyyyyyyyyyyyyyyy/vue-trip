@@ -174,19 +174,19 @@ export default defineComponent({
     @apply w-screen h-screen relative;
 
     &-bg1 {
-      background: url("@/assets/images/fixed-bg/cople.jpg") no-repeat;
+      background: url("@/assets/images/fixed-bg/blue-star.jpg") no-repeat;
       background-size: cover;
       background-attachment: fixed;
     }
     &-bg2 {
-      background: url("@/assets/images/fixed-bg/girl.jpg") no-repeat;
+      background: url("@/assets/images/fixed-bg/blue-light.jpg") no-repeat;
       background-size: cover;
       background-attachment: fixed;
     }
     &-shadow {
       @apply absolute top-0 left-0;
       @apply w-full h-full;
-      @apply bg-secondary-dark/70 z-10;
+      @apply bg-secondary-dark/30 z-10;
     }
     &-main {
       @apply absolute top-0 left-0;
