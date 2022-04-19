@@ -1,19 +1,30 @@
 <template lang="pug">
 .container--page
   Header
-  .card.container
-    .trip-page-header
-      img(:src="defaultImgUrl + tripData.imageUrl" alt="")
 
-    .trip-page-main
-      .trip-page-main-title
-        .page-title {{ tripData.actName }}
-        .sub-title
-          svg-icon(name="location" color="#012f6a")
-          p {{ tripData.address }}
+  .container
+    BackBtn
+    .card
+      .trip-page-header
+        img(:src="defaultImgUrl + tripData.imageUrl" alt="")
 
-      .trip-page-main-value
-        p {{ tripData.description }}
+      .trip-page-main
+        .trip-page-main-title
+          .page-title {{ tripData.actName }}
+          .sub-title
+            svg-icon(name="location" color="#012f6a")
+            p {{ tripData.address }}
+
+        .trip-page-main-value {{ tripData.description }}
+
+      GMapMap(
+      :center="center"
+      :zoom="7"
+      map-type-id="terrain")
+
+
+
+
 
 
 
@@ -24,11 +35,16 @@ import {defineComponent, onMounted, toRefs} from "vue";
 import {defaultImgUrl} from "@/const/appConsts";
 import {reactive} from "@vue/reactivity";
 import Header from "@/components/HomePage/Header.vue";
+import BackBtn from "@/components/BackBtn.vue";
+import BaseApi from "@/services/api";
+import {MAP_API_KEY} from "@/config";
 
 export default defineComponent({
   name: "TripPage",
   components: {
-    Header
+    BackBtn,
+    Header,
+
   },
   props: {
     id: {
@@ -37,17 +53,24 @@ export default defineComponent({
   },
   setup(props) {
     const state = reactive({
-      tripData: {} as any
+      tripData: {} as any,
+      center: {} as {lat: number, lng: number}
     })
 
 
     const getTripData = async () => {
       const activity = await require("@/assets/jsonData/activity.json")
-      state.tripData = activity.find((_: any) => {
+      const tripData = activity.find((_: any) => {
         return _.actId == props.id!
       })
-      console.log(state.tripData)
+      state.tripData = tripData
+      state.center = {
+        lat: JSON.parse(tripData.longitude),
+        lng: JSON.parse(tripData.latitude)
+      }
+
     }
+
 
 
     onMounted( ()=>{
@@ -57,7 +80,7 @@ export default defineComponent({
 
     return {
       ...toRefs(state),
-      defaultImgUrl
+      defaultImgUrl,
 
     }
   }
@@ -99,5 +122,8 @@ export default defineComponent({
   }
 
 }
-
+.vue-map-container {
+  @apply w-full;
+  height: 500px;
+}
 </style>

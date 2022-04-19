@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@fawmi/vue-google-maps": "^0.9.51",
-    "@googlemaps/js-api-loader": "^1.13.11",
     "@types/aos": "^3.0.4",
     "aos": "^3.0.0-beta.6",
     "axios": "^0.26.1",

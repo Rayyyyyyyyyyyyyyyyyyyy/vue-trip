@@ -138,6 +138,7 @@ export default defineComponent({
 
     const localSuccess = async (position: any) => {
       const latlng = position.coords.latitude + "," + position.coords.longitude
+      console.log("latlng", latlng)
       await getAddress(latlng)
       await setCityArea()
       await getWeather()

@@ -6,11 +6,11 @@ declare module 'vue' {
   export interface GlobalComponents {
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCol: typeof import('element-plus/es')['ElCol']
-    ElImage: typeof import('element-plus/es')['ElImage']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElRow: typeof import('element-plus/es')['ElRow']
     ElSelect: typeof import('element-plus/es')['ElSelect']
     FooterComponent: typeof import('./src/components/FooterComponent.vue')['default']
+    Header: typeof import('./src/components/HomePage/Header.vue')['default']
     HomeCourse: typeof import('./src/components/HomePage/HomeCourse.vue')['default']
     HomeExplore: typeof import('./src/components/HomePage/HomeExplore.vue')['default']
     HomeGroup: typeof import('./src/components/HomePage/HomeGroup.vue')['default']
