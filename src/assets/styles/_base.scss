@@ -40,8 +40,7 @@ html {
   @apply w-10/12;
 
   &--page {
-    width: 1000px;
-    max-width: 100%;
+    @apply w-10/12;
   }
 }
 

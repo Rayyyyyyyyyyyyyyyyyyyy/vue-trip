@@ -43,6 +43,8 @@ import AOS from "aos";
 import TripCard from "@/components/TripCard.vue";
 import {reactive} from "@vue/reactivity";
 import getRandomInt from "@/utils/getRandom";
+import router from "@/router";
+import RouterNames from "@/router/name";
 
 export default defineComponent({
   name: "HomeGroup",
@@ -110,10 +112,18 @@ export default defineComponent({
 
     const clickedFun = (data: any) => {
       console.log("data", data)
+      router.push({
+        name: RouterNames.tripPage,
+        params: {
+          id: data.actId
+        }
+      })
     }
 
     const goMoreUrl = () => {
-
+      router.push({
+        name: RouterNames.tripList,
+      })
     }
 
     return {

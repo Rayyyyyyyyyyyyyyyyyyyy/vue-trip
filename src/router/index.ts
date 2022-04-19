@@ -15,6 +15,17 @@ const routes: Array<RouteRecordRaw> = [
     ]
   },
   {
+    path: "/trip-list",
+    name: RouterNames.tripList,
+    component: () => import("@/views/trip/TripList.vue")
+  },
+  {
+    path: "/trip-list/:id",
+    name: RouterNames.tripPage,
+    props: true,
+    component: () => import("@/views/trip/TripPage.vue")
+  },
+  {
     path: "/:catchAll(.*)",
     name: RouterNames.page404,
     component: () => import("@/views/NotFound.vue")

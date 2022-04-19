@@ -1,7 +1,8 @@
 const _RouterNames = {
   homeLayout: "homeLayout",
   home: "home",
-  signLayout: "signLayout",
+  tripList: "tripList",
+  tripPage: "tripPage",
 
   page404: "page404"
 

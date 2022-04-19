@@ -1,7 +1,6 @@
-
 <template lang="pug">
 .header.home-header-style
-  svg-icon(name="logo" :width="80" :height="80")
+  svg-icon(name="logo" :width="60" :height="60")
   .header_center
 
   .header_right
@@ -56,7 +55,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .header {
-  @apply h-24 px-6 py-4;
+  @apply px-6 py-4;
   @apply flex items-center justify-between;
   &_center {
     @apply flex-1;
