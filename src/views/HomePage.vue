@@ -58,7 +58,7 @@ import {reactive} from "@vue/reactivity";
 import BaseApi from "@/services/api";
 import {ElMessage} from "element-plus";
 import {MAP_API_KEY} from "@/config";
-import {city_name, weatherIconRul} from "@/const/appConsts";
+import {city_name, defaultImgUrl, weatherIconRul} from "@/const/appConsts";
 import dayjs from "dayjs";
 import getRandomInt from "@/utils/getRandom";
 
@@ -185,8 +185,7 @@ export default defineComponent({
       const city = activity.filter((_: any)=>{
         return  _.cityName.includes(city_name) == true && _.imageUrl != null
       })
-      const defaultUrl = "https://cloud.culture.tw"
-      landingHeaderDom.style.background = `url(${defaultUrl}${city[getRandomInt(city.length)].imageUrl}) no-repeat`
+      landingHeaderDom.style.background = `url(${defaultImgUrl}${city[getRandomInt(city.length)].imageUrl}) no-repeat`
       landingHeaderDom.style.backgroundSize = "cover"
 
     }

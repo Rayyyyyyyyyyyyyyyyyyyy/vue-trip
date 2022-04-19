@@ -1,7 +1,7 @@
 <template lang="pug">
 .trip-card
   .trip-card--img(@click="cardClicked")
-    img(:src=`"https://cloud.culture.tw/" + card_data.imageUrl`)
+    img(:src="defaultImgUrl + card_data.imageUrl")
   .trip-card--img-alt
     svg-icon(name="location" color="#1877f2")
     .item-text {{ card_data.cityName }}
@@ -26,6 +26,7 @@
 
 import {defineComponent, onMounted} from "vue";
 import AOS from "aos";
+import { defaultImgUrl } from "@/const/appConsts";
 
 export default defineComponent({
   name: "TripCard",
@@ -48,7 +49,8 @@ export default defineComponent({
 
 
     return {
-      cardClicked
+      cardClicked,
+      defaultImgUrl
     }
   }
 });
