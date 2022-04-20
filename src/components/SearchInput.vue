@@ -68,12 +68,15 @@ export default defineComponent({
       @apply hidden;
     }
     &-item {
-      @apply flex-1 mr-2 pr-2;
-      @apply border-r-2 border-secondary/30;
+      @apply flex-1 mr-2 pl-2;
 
       select {
         @apply p-2 rounded w-full;
       }
+    }
+    &-item + &-item {
+      @apply border-l-2 border-secondary/30;
+
     }
 
 
