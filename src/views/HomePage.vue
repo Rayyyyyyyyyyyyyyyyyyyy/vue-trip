@@ -1,5 +1,13 @@
 <template lang="pug">
 .landing-header.landing-header-bg
+  .landing-header--search(
+    data-aos="fade-zoom-in"
+    data-aos-easing="ease-out"
+    data-aos-duration="900"
+    data-aos-delay="1300"
+  )
+    .landing-header--search-title 近在咫尺的美
+    SearchInput
   .landing-header--weather(
     v-if="cityName != ''"
     data-aos-easing="ease-out"
