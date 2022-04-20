@@ -1,13 +1,15 @@
 <template lang="pug">
 .search
-  el-input(
-    v-model="searchValue"
-    size="large")
+  input(
+    v-model="searchValue")
   .search-select
-    el-select
-    el-select
-    el-select
-    el-select
+    .search-select-item
+      select
+    .search-select-item
+      select
+    .search-select-item
+      select
+
 
   .search-submit
     img(:src="require('@/assets/images/plane.png')" alt="plane")
@@ -50,14 +52,32 @@ export default defineComponent({
 <style lang="scss" scoped>
 .search{
   @apply bg-bg shadow-lg rounded-full h-14 w-full pl-6 pr-16 py-4;
-  @apply flex items-center relative ;
+  @apply flex items-center relative;
+
+  input {
+    @apply p-2 rounded;
+    @apply flex-1 mr-2;
+
+  }
 
   &-select {
-    @apply flex items-center;
+    @apply flex items-center flex-1;
+    @apply pl-2 border-l-2  border-secondary/30;
 
     @media (max-width: 768px) {
       @apply hidden;
     }
+    &-item {
+      @apply flex-1 mr-2 pr-2;
+      @apply border-r-2 border-secondary/30;
+
+      select {
+        @apply p-2 rounded w-full;
+      }
+    }
+
+
+
   }
 
   &-submit{
@@ -69,12 +89,6 @@ export default defineComponent({
       @apply w-10/12;
     }
   }
-}
-.el-input{
-  @apply mr-2;
-}
-.el-select + .el-select {
-  @apply ml-2;
 }
 
 
