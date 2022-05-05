@@ -1,19 +1,26 @@
 <template lang="pug">
 .search
-  input(
-    v-model="searchValue")
 
   .search-select
     .search-select-item
-      select(v-model="city_name")
+      select(v-model="city_name" @change="citySelected")
         option(value="" disabled selected) 城市
+        option(v-for="(item, idx) in cityArr"
+          :key="idx"
+          :label="item.label"
+          :value="item.value")
+
     .search-select-item
       select(v-model="area_name")
         option(value="" disabled selected) 區域
+        option(v-for="(item, idx) in areaArr"
+          :key="idx"
+          :label="item.label"
+          :value="item.value")
 
 
 
-  .search-submit
+  .search-submit(@click="searchSubmit")
     img(:src="require('@/assets/images/plane.png')" alt="plane")
 
 
@@ -27,6 +34,9 @@ import AOS from "aos";
 import TripCard from "@/components/TripCard.vue";
 import {reactive} from "@vue/reactivity";
 import SvgIcon from "@/components/SvgIcon.vue";
+import {city_name} from "@/const/appConsts";
+import RouterNames from "@/router/name";
+import router from "@/router";
 
 export default defineComponent({
   name: "SearchInput",
@@ -39,21 +49,117 @@ export default defineComponent({
   },
   setup(props) {
     const state = reactive({
-      searchValue: "",
       city_name: "",
-      area_name: "area_name",
+      area_name: "",
       cityArr: [] as {
         label: string,
         value: string
-      }[]
+      }[],
+      activity: [] as any[],
+      areaArr: [] as {
+        label: string,
+        value: string
+      }[],
     })
 
+
+    const getCityOption = async () => {
+      state.activity = await require("@/assets/jsonData/activity.json")
+      const cityList = [] as any[]
+      state.activity.map((_: any)=>{
+        cityList.push((_.cityName).split(" ")[0])
+      })
+      const cityNameList = cityList.filter((city: string, idx: number)=>{
+        return cityList.indexOf(city) == idx;
+      })
+      cityNameList.map((_)=>{
+        state.cityArr.push({
+          label: _,
+          value: _
+        })
+      })
+    }
+
+    onMounted(()=>{
+      getCityOption()
+    })
+
+    const citySelected = () => {
+      state.areaArr = []
+      if(state.city_name != "") {
+        const areaArr = state.activity.filter((_: any) => {
+          return  _.cityName.includes(state.city_name) == true
+        })
+        const areaList = [] as any[]
+        areaArr.map((_: any)=>{
+          if((_.cityName).split(" ")[2] != undefined){
+            areaList.push((_.cityName).split(" ")[2])
+          }
+        })
+        const areaNameList = areaList.filter((city: string, idx: number)=>{
+          return areaList.indexOf(city) == idx;
+        })
+        areaNameList.map((_)=>{
+          state.areaArr.push({
+            label: _,
+            value: _
+          })
+        })
+
+      }
+    }
+
+    const searchSubmit = () => {
+      const selectedTrip = state.activity.filter((_)=>{
+        if(state.area_name != "") {
+          return  _.cityName.includes(state.area_name) == true
+        }else{
+          return  _.cityName.includes(state.city_name) == true
+        }
+      })
+      if(selectedTrip.length == state.activity.length) {
+        router.push({
+          name: RouterNames.tripList
+        })
+      }
+      if(selectedTrip.length > 1){
+        let keyword
+        if(state.area_name == "") {
+          keyword = selectedTrip[0].cityName.split(" ")[0]
+          router.push({
+            name: RouterNames.tripList,
+            params: {
+              keyword: keyword
+            }
+          })
+        }else{
+          keyword = selectedTrip[0].cityName.split(" ")[0] + "," + selectedTrip[0].cityName.split(" ")[2]
+          router.push({
+            name: RouterNames.tripList,
+            params: {
+              keyword: keyword
+            }
+          })
+        }
+
+      }else{
+        router.push({
+          name: RouterNames.tripPage,
+          params: {
+            id: selectedTrip[0].actId
+          }
+        })
+      }
+
+    }
 
 
 
 
     return {
-      ...toRefs(state)
+      ...toRefs(state),
+      citySelected,
+      searchSubmit
     }
   }
 });
@@ -72,7 +178,7 @@ export default defineComponent({
 
   &-select {
     @apply flex items-center flex-1;
-    @apply pl-2 border-l-2  border-secondary/30;
+    @apply pl-2;
 
     @media (max-width: 768px) {
       @apply hidden;

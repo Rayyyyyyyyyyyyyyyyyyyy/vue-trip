@@ -15,8 +15,9 @@ const routes: Array<RouteRecordRaw> = [
     ]
   },
   {
-    path: "/trip-list",
+    path: "/trip-list/:keyword?",
     name: RouterNames.tripList,
+    props: true,
     component: () => import("@/views/trip/TripList.vue")
   },
   {
