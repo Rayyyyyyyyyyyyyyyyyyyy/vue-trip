@@ -189,7 +189,7 @@ export default defineComponent({
       @apply flex-1 mr-2 pl-2;
 
       select {
-        @apply p-2 rounded w-full;
+        @apply p-2 rounded w-full bg-white;
       }
     }
     &-item + &-item {

@@ -11,8 +11,7 @@
       @click="goUserUrl"
       name="user"
       :width="36"
-      :height="36"
-      color="#fff" )
+      :height="36")
 
 
 
@@ -66,6 +65,10 @@ export default defineComponent({
 .header {
   @apply px-6 py-4;
   @apply flex items-center justify-between;
+  svg {
+    @apply fill-white stroke-white;
+  }
+
   &_center {
     @apply flex-1;
     @apply flex items-center justify-center;

@@ -52,8 +52,8 @@ export default defineComponent({
 
 .trip-list {
   .home-header-style {
-    @apply bg-primary-light;
-    position: unset;
+    @apply bg-primary/30;
+
   }
 }
 
