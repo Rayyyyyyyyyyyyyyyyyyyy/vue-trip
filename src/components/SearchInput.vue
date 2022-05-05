@@ -117,31 +117,33 @@ export default defineComponent({
           return  _.cityName.includes(state.city_name) == true
         }
       })
-      if(selectedTrip.length == state.activity.length) {
-        router.push({
-          name: RouterNames.tripList
-        })
-      }
+      console.log("selectedTrip", selectedTrip)
+
       if(selectedTrip.length > 1){
-        let keyword
-        if(state.area_name == "") {
-          keyword = selectedTrip[0].cityName.split(" ")[0]
+        if(selectedTrip.length == state.activity.length) {
           router.push({
-            name: RouterNames.tripList,
-            params: {
-              keyword: keyword
-            }
+            name: RouterNames.tripList
           })
         }else{
-          keyword = selectedTrip[0].cityName.split(" ")[0] + "," + selectedTrip[0].cityName.split(" ")[2]
-          router.push({
-            name: RouterNames.tripList,
-            params: {
-              keyword: keyword
-            }
-          })
+          let keyword
+          if(state.area_name == "") {
+            keyword = selectedTrip[0].cityName.split(" ")[0]
+            router.push({
+              name: RouterNames.tripList,
+              params: {
+                keyword: keyword
+              }
+            })
+          }else{
+            keyword = selectedTrip[0].cityName.split(" ")[0] + "," + selectedTrip[0].cityName.split(" ")[2]
+            router.push({
+              name: RouterNames.tripList,
+              params: {
+                keyword: keyword
+              }
+            })
+          }
         }
-
       }else{
         router.push({
           name: RouterNames.tripPage,
