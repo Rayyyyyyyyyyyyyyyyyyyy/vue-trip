@@ -6,7 +6,7 @@
     data-aos-duration="900"
     data-aos-delay="1300"
   )
-    .landing-header--search-title 近在咫尺的美
+    .landing-header--search-title 開創只屬於我們的旅程
     SearchInput
   .landing-header--weather(
     v-if="cityName != ''"
@@ -98,7 +98,7 @@ export default defineComponent({
       rainPercentage: "",
       min: 0,
       max: 0,
-      timeStatus: "day"
+      timeStatus: "day",
     });
 
     const getWeather = async () => {
@@ -196,7 +196,6 @@ export default defineComponent({
       })
       landingHeaderDom.style.background = `url(${defaultImgUrl}${city[getRandomInt(city.length)].imageUrl}) no-repeat`
       landingHeaderDom.style.backgroundSize = "cover"
-
     }
 
 
@@ -305,8 +304,12 @@ export default defineComponent({
   }
 
   &--taiwan {
-    @apply absolute bottom-0 right-4 ;
+    @apply absolute bottom-0 right-4;
     @apply opacity-70 w-1/4;
+    @media (max-width: 768px) {
+      @apply w-1/3;
+
+    }
   }
 
 

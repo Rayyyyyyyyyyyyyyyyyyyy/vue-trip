@@ -71,7 +71,7 @@
               :card_data="card_fore")
 
 
-        el-button.btn.mt-10(
+        el-button.btn(
           @click="goMoreUrl"
           data-aos="zoom-in"
           type="info"
@@ -95,6 +95,8 @@ import TripCard from "@/components/TripCard.vue";
 import SvgIcon from "@/components/SvgIcon.vue";
 import {reactive} from "@vue/reactivity";
 import getRandomInt from "@/utils/getRandom";
+import router from "@/router";
+import RouterNames from "@/router/name";
 
 export default defineComponent({
   name: "HomeNews",
@@ -110,6 +112,7 @@ export default defineComponent({
     const state = reactive({
       first_card_span: 12,
       sec_card_span: 12,
+      svg_width: 300,
 
       card_one: {} as any,
       card_two: {} as any,
@@ -129,13 +132,13 @@ export default defineComponent({
 
     window.addEventListener("resize", ()=>{
       console.log(window.innerWidth)
+      state.svg_width = window.innerWidth / 2
       setSpan()
     })
 
 
     const getPopularData = async () => {
       const activity = await require("@/assets/jsonData/activity.json")
-      // console.log("activity", activity)
       activity.map((_: any)=>{
         state.card_one = activity[getRandomInt(activity.length + 1)]
         state.card_two = activity[getRandomInt(activity.length + 1)]
@@ -152,10 +155,18 @@ export default defineComponent({
 
     const clickedFun = (data: any) => {
       console.log("data", data)
+      router.push({
+        name: RouterNames.tripPage,
+        params: {
+          id: data.actId
+        }
+      })
     }
 
     const goMoreUrl = () => {
-
+      router.push({
+        name: RouterNames.tripList,
+      })
     }
 
 
@@ -202,6 +213,10 @@ export default defineComponent({
     @apply w-screen h-full;
     @apply flex items-center;
     @apply py-10;
+    @media (max-width: 550px) {
+      @apply relative;
+      height: 1000px;
+    }
 
     &-left {
       @apply flex-1 h-1/2 bg-bg-light/50 w-full;
@@ -210,10 +225,18 @@ export default defineComponent({
     }
     &-right {
       @apply flex-1 p-6;
+      @media (max-width: 550px) {
+        @apply absolute top-0;
+
+      }
     }
 
     &-title {
       @apply flex items-center mb-10;
+      @media (max-width: 550px) {
+        @apply mt-10;
+
+      }
 
       .hr {
         @apply border-t-2 border-secondary-dark flex-1 ml-6;
@@ -221,6 +244,11 @@ export default defineComponent({
     }
     &-cards {
       @apply w-full flex flex-col items-center justify-center;
+
+      .btn {
+        @apply mt-10;
+
+      }
     }
   }
 

@@ -73,16 +73,17 @@ export default defineComponent({
         state.sec_card_span = 8
         state.third_card_span = 8
       }else{
-        state.first_card_span = 12
-        state.sec_card_span = 12
+        state.first_card_span = 10
+        state.sec_card_span = 10
         state.third_card_span = 0
 
-        if(window.innerWidth <= 375){
-          state.first_card_span = 24
+        if(window.innerWidth <= 550){
+          state.first_card_span = 18
           state.sec_card_span = 0
           state.third_card_span = 0
 
         }
+
       }
 
     }
@@ -138,7 +139,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .popular {
   @apply py-10 w-full relative my-6;
-  min-height: 570px;
+  min-height: 550px;
 
   &--bg {
     @apply h-3/4 w-screen bg-primary-light/20;

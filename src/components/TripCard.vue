@@ -68,6 +68,7 @@ export default defineComponent({
   @apply w-full rounded-lg shadow-md;
   @apply flex flex-col relative;
   @apply z-30;
+  min-width: 200px;
 
   &--img {
     @apply z-20 w-full overflow-hidden;

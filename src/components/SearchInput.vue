@@ -2,13 +2,15 @@
 .search
   input(
     v-model="searchValue")
+
   .search-select
     .search-select-item
-      select
+      select(v-model="city_name")
+        option(value="" disabled selected) 城市
     .search-select-item
-      select
-    .search-select-item
-      select
+      select(v-model="area_name")
+        option(value="" disabled selected) 區域
+
 
 
   .search-submit
@@ -37,8 +39,16 @@ export default defineComponent({
   },
   setup(props) {
     const state = reactive({
-      searchValue: ""
+      searchValue: "",
+      city_name: "",
+      area_name: "area_name",
+      cityArr: [] as {
+        label: string,
+        value: string
+      }[]
     })
+
+
 
 
 

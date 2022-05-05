@@ -68,7 +68,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .explore {
   @apply py-8 w-full mb-6;
-  min-height: 650px;
+
   &-title {
     @apply flex items-center mb-8;
 
@@ -81,6 +81,9 @@ export default defineComponent({
   &-banner {
     @apply flex w-full h-full;
     max-height: 80vh;
+    @media (max-width: 550px) {
+      @apply flex-col;
+    }
     img {
       @apply object-cover;
       @apply w-full h-full;
@@ -88,6 +91,7 @@ export default defineComponent({
     }
     &-item {
       @apply relative;
+
 
       img {
         &:hover{
@@ -117,6 +121,9 @@ export default defineComponent({
     &-left {
       @apply w-5/12 mr-2;
       @apply flex flex-col overflow-hidden;
+      @media (max-width: 550px) {
+        @apply w-full mb-2;
+      }
 
       .explore-banner-item{
         @apply w-full h-1/2;
@@ -130,14 +137,22 @@ export default defineComponent({
     &-right {
       @apply w-7/12;
       @apply flex flex-col overflow-hidden;
+      @media (max-width: 550px) {
+        @apply w-full;
+        height: 260px;
+      }
 
       .explore-banner-item {
         @apply w-full h-4/5;
+        @media (max-width: 550px) {
+          @apply h-2/3;
+        }
       }
       &--bottom {
         @apply w-full h-full flex overflow-hidden mt-2;
         .explore-banner-item {
           @apply w-1/3 h-full;
+
         }
       }
     }
