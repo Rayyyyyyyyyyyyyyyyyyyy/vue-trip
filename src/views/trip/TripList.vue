@@ -1,13 +1,19 @@
 <template lang="pug">
-.h-screen.w-screen.flex.justify-center.items-center.text-xl
+.trip-list
+
+  HomeHeader
   p {{keyword}}
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import HomeHeader from "@/components/HomePage/HomeHeader.vue";
 
 export default defineComponent({
   name: "TripList",
+  components: {
+    HomeHeader
+  },
   props:{
     keyword: {
       type: String
@@ -20,4 +26,13 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+.trip-list {
+  .home-header-style {
+    @apply bg-primary-light;
+    position: unset;
+  }
+}
+
+</style>

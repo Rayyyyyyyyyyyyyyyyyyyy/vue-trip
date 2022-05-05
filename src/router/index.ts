@@ -21,7 +21,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/trip/TripList.vue")
   },
   {
-    path: "/trip-list/:id",
+    path: "/trip-page/:id",
     name: RouterNames.tripPage,
     props: true,
     component: () => import("@/views/trip/TripPage.vue")

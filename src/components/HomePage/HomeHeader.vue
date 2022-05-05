@@ -1,6 +1,9 @@
 <template lang="pug">
 .header.home-header-style
-  svg-icon(name="logo" :width="60" :height="60")
+  svg-icon(
+    @click="goHomeUrl"
+    name="logo" :width="60" :height="60")
+
   .header_center
 
   .header_right
@@ -40,11 +43,17 @@ export default defineComponent({
         name: RouterNames.home
       })
     }
+    const goHomeUrl = () => {
+      router.push({
+        name: RouterNames.home
+      })
+    }
 
 
 
     return {
-      goUserUrl
+      goUserUrl,
+      goHomeUrl
     }
   }
 });
