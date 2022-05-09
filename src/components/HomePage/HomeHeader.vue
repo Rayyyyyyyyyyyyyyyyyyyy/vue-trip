@@ -23,6 +23,7 @@ import SvgIcon from "@/components/SvgIcon.vue";
 import {defineComponent} from "vue";
 import {useRouter} from "vue-router";
 import RouterNames from "@/router/name";
+import {ElMessage} from "element-plus";
 
 
 export default defineComponent({
@@ -38,9 +39,8 @@ export default defineComponent({
     const router = useRouter()
 
     const goUserUrl = () => {
-      router.push({
-        name: RouterNames.home
-      })
+      ElMessage("Coming soon")
+
     }
     const goHomeUrl = () => {
       router.push({
@@ -87,21 +87,7 @@ export default defineComponent({
   }
 }
 
-::v-deep(){
-  .el-tabs {
-    &__header {
-      @apply mb-0;
-    }
-    &__item {
-      @apply text-white text-lg;
-      padding: 0 40px;
-    }
 
-  }
-  .is-active{
-    @apply text-primary;
-  }
-}
 .profile-img{
   @apply w-8 h-8 rounded-full bg-secondary overflow-hidden ml-6;
   @apply cursor-pointer;

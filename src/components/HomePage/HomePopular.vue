@@ -45,6 +45,7 @@ import {reactive} from "@vue/reactivity";
 import getRandomInt from "@/utils/getRandom";
 import router from "@/router";
 import RouterNames from "@/router/name";
+import {ElMessage} from "element-plus";
 
 export default defineComponent({
   name: "HomeGroup",
@@ -122,9 +123,11 @@ export default defineComponent({
     }
 
     const goMoreUrl = () => {
-      router.push({
-        name: RouterNames.tripList,
-      })
+      ElMessage("Coming soon")
+
+      // router.push({
+      //   name: RouterNames.tripList,
+      // })
     }
 
     return {

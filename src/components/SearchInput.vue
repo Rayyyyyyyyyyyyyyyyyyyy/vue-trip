@@ -30,13 +30,9 @@
 <script lang="ts">
 
 import {defineComponent, onMounted, toRefs} from "vue";
-import AOS from "aos";
-import TripCard from "@/components/TripCard.vue";
 import {reactive} from "@vue/reactivity";
 import SvgIcon from "@/components/SvgIcon.vue";
-import {city_name} from "@/const/appConsts";
-import RouterNames from "@/router/name";
-import router from "@/router";
+import { ElMessage } from "element-plus";
 
 export default defineComponent({
   name: "SearchInput",
@@ -110,48 +106,49 @@ export default defineComponent({
     }
 
     const searchSubmit = () => {
-      const selectedTrip = state.activity.filter((_)=>{
-        if(state.area_name != "") {
-          return  _.cityName.includes(state.area_name) == true
-        }else{
-          return  _.cityName.includes(state.city_name) == true
-        }
-      })
-      console.log("selectedTrip", selectedTrip)
-
-      if(selectedTrip.length > 1){
-        if(selectedTrip.length == state.activity.length) {
-          router.push({
-            name: RouterNames.tripList
-          })
-        }else{
-          let keyword
-          if(state.area_name == "") {
-            keyword = selectedTrip[0].cityName.split(" ")[0]
-            router.push({
-              name: RouterNames.tripList,
-              params: {
-                keyword: keyword
-              }
-            })
-          }else{
-            keyword = selectedTrip[0].cityName.split(" ")[0] + "," + selectedTrip[0].cityName.split(" ")[2]
-            router.push({
-              name: RouterNames.tripList,
-              params: {
-                keyword: keyword
-              }
-            })
-          }
-        }
-      }else{
-        router.push({
-          name: RouterNames.tripPage,
-          params: {
-            id: selectedTrip[0].actId
-          }
-        })
-      }
+      ElMessage("Coming soon")
+      // const selectedTrip = state.activity.filter((_)=>{
+      //   if(state.area_name != "") {
+      //     return  _.cityName.includes(state.area_name) == true
+      //   }else{
+      //     return  _.cityName.includes(state.city_name) == true
+      //   }
+      // })
+      // console.log("selectedTrip", selectedTrip)
+      //
+      // if(selectedTrip.length > 1){
+      //   if(selectedTrip.length == state.activity.length) {
+      //     router.push({
+      //       name: RouterNames.tripList
+      //     })
+      //   }else{
+      //     let keyword
+      //     if(state.area_name == "") {
+      //       keyword = selectedTrip[0].cityName.split(" ")[0]
+      //       router.push({
+      //         name: RouterNames.tripList,
+      //         params: {
+      //           keyword: keyword
+      //         }
+      //       })
+      //     }else{
+      //       keyword = selectedTrip[0].cityName.split(" ")[0] + "," + selectedTrip[0].cityName.split(" ")[2]
+      //       router.push({
+      //         name: RouterNames.tripList,
+      //         params: {
+      //           keyword: keyword
+      //         }
+      //       })
+      //     }
+      //   }
+      // }else{
+      //   router.push({
+      //     name: RouterNames.tripPage,
+      //     params: {
+      //       id: selectedTrip[0].actId
+      //     }
+      //   })
+      // }
 
     }
 

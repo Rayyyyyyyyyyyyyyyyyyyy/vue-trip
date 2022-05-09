@@ -9,11 +9,7 @@
 <script lang="ts">
 
 import {defineComponent, onMounted, toRefs} from "vue";
-import AOS from "aos";
-import TripCard from "@/components/TripCard.vue";
 import {reactive} from "@vue/reactivity";
-import SvgIcon from "@/components/SvgIcon.vue";
-import router from "@/router";
 
 export default defineComponent({
   name: "BackBtn",
