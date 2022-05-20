@@ -29,6 +29,7 @@ module.exports = {
           fb: "#1877f2",
           twitter: "#1da1f2",
           yt: "#FF5555",
+          origin: "#D6B04D"
         }
       },
       fontFamily: {

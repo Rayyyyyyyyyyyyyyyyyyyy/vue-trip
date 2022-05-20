@@ -22,8 +22,8 @@
           data-aos="fade-zoom-in"
           data-aos-easing="ease-out"
           data-aos-duration="900"
-          data-aos-delay="600"
           data-aos-offset="200"
+          data-aos-delay="600"
         ) #即將開團
         .hr(
           data-aos="zoom-in-left"

@@ -20,6 +20,7 @@ import SvgIcon from "@/components/SvgIcon.vue";
 import {defineComponent} from "vue";
 import {useRouter} from "vue-router";
 import RouterNames from "@/router/name";
+import {ElMessage} from "element-plus";
 
 
 export default defineComponent({
@@ -35,9 +36,11 @@ export default defineComponent({
     const router = useRouter()
 
     const goUserUrl = () => {
-      router.push({
-        name: RouterNames.home
-      })
+      ElMessage("Coming soon")
+
+      // router.push({
+      //   name: RouterNames.home
+      // })
     }
     const goHomeUrl = () => {
       router.push({
@@ -61,7 +64,7 @@ export default defineComponent({
 .header {
   @apply px-6 py-4;
   @apply flex items-center justify-between;
-  @apply bg-primary;
+  @apply bg-primary/30;
   &_center {
     @apply flex-1;
     @apply flex items-center justify-center;

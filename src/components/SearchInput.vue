@@ -63,7 +63,7 @@ export default defineComponent({
 
     const getCityOption = async () => {
       state.activity = await require("@/assets/jsonData/activity.json")
-      const cityList = [] as any[]
+      let cityList = [] as any[]
       state.activity.map((_: any)=>{
         cityList.push((_.cityName).split(" ")[0])
       })
