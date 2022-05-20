@@ -92,17 +92,14 @@ import {defineComponent, onMounted, toRefs} from "vue";
 import AOS from "aos";
 import NewsContent from "@/components/HomePage/NewsContent.vue";
 import TripCard from "@/components/TripCard.vue";
-import SvgIcon from "@/components/SvgIcon.vue";
 import {reactive} from "@vue/reactivity";
 import getRandomInt from "@/utils/getRandom";
 import router from "@/router";
 import RouterNames from "@/router/name";
-import {ElMessage} from "element-plus";
 
 export default defineComponent({
   name: "HomeNews",
   components: {
-    SvgIcon,
     NewsContent,
     TripCard
   },
@@ -165,11 +162,10 @@ export default defineComponent({
     }
 
     const goMoreUrl = () => {
-      ElMessage("Coming soon")
-
-      // router.push({
-      //   name: RouterNames.tripList,
-      // })
+      // ElMessage("Coming soon")
+      router.push({
+        name: RouterNames.tripList,
+      })
     }
 
 

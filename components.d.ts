@@ -7,6 +7,8 @@ declare module 'vue' {
     BackBtn: typeof import('./src/components/BackBtn.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCol: typeof import('element-plus/es')['ElCol']
+    ElEmpty: typeof import('element-plus/es')['ElEmpty']
+    ElImage: typeof import('element-plus/es')['ElImage']
     ElRow: typeof import('element-plus/es')['ElRow']
     FooterComponent: typeof import('./src/components/FooterComponent.vue')['default']
     Header: typeof import('./src/components/HomePage/Header.vue')['default']
@@ -21,6 +23,7 @@ declare module 'vue' {
     SvgIcon: typeof import('./src/components/SvgIcon.vue')['default']
     TaiwanMap: typeof import('./src/components/HomePage/TaiwanMap.vue')['default']
     TripCard: typeof import('./src/components/TripCard.vue')['default']
+    TripListItem: typeof import('./src/components/TripListItem.vue')['default']
   }
 }
 

@@ -123,11 +123,10 @@ export default defineComponent({
     }
 
     const goMoreUrl = () => {
-      ElMessage("Coming soon")
-
-      // router.push({
-      //   name: RouterNames.tripList,
-      // })
+      // ElMessage("Coming soon")
+      router.push({
+        name: RouterNames.tripList,
+      })
     }
 
     return {

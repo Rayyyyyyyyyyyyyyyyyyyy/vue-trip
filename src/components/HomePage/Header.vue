@@ -1,6 +1,8 @@
 <template lang="pug">
 .header
-  svg-icon(name="logo" :width="40" :height="40")
+  svg-icon(
+    @click="goHomeUrl"
+    name="logo" :width="40" :height="40")
   .header_center
 
   .header_right
@@ -12,9 +14,6 @@
       color="#fff" )
 
 
-
-
-
 </template>
 <script lang="ts">
 import SvgIcon from "@/components/SvgIcon.vue";
@@ -24,7 +23,7 @@ import RouterNames from "@/router/name";
 
 
 export default defineComponent({
-  name: "HomeHeader",
+  name: "HeaderComponent",
   components: {
     SvgIcon
   },
@@ -40,11 +39,16 @@ export default defineComponent({
         name: RouterNames.home
       })
     }
-
+    const goHomeUrl = () => {
+      router.push({
+        name: RouterNames.home
+      });
+    }
 
 
     return {
-      goUserUrl
+      goUserUrl,
+      goHomeUrl
     }
   }
 });

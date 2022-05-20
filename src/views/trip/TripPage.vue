@@ -36,12 +36,10 @@
 import {defineComponent, onMounted, toRefs} from "vue";
 import {defaultImgUrl} from "@/const/appConsts";
 import {reactive} from "@vue/reactivity";
-import Header from "@/components/HomePage/Header.vue";
 import BackBtn from "@/components/BackBtn.vue";
-import BaseApi from "@/services/api";
-import {MAP_API_KEY} from "@/config";
 import router from "@/router";
 import RouterNames from "@/router/name";
+import Header from "@/components/HomePage/Header.vue";
 
 export default defineComponent({
   name: "TripPage",

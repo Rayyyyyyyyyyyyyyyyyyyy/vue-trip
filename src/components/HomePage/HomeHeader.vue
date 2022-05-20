@@ -45,7 +45,7 @@ export default defineComponent({
     const goHomeUrl = () => {
       router.push({
         name: RouterNames.home
-      })
+      });
     }
 
 

@@ -1,18 +1,44 @@
 <template lang="pug">
 .trip-list
+  Header
+  .container
+    .trip-list--title {{ searchTitle }}
 
-  HomeHeader
-  p {{keyword}}
+    span(v-if="tripList.length > 0")
+      el-row(:gutter="20")
+        el-col(
+          v-for="trip in tripList"
+          :span="6")
+          TripListItem(
+            :key="trip.actId"
+            :imgUrl="trip.imageUrl"
+            :trip_title="trip.actName"
+            :trip_content="trip.description"
+            :trip_id="trip.actId"
+          )
+
+
+
+
+
+
+
+    el-empty(v-else)
+
+
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import HomeHeader from "@/components/HomePage/HomeHeader.vue";
+import { defineComponent, onMounted, reactive, toRefs, watch } from "vue";
+import Header from "@/components/HomePage/Header.vue";
+import TripListItem from "@/components/TripListItem.vue";
+import {TActivity} from "@/types/apiTypes";
 
 export default defineComponent({
   name: "TripList",
   components: {
-    HomeHeader
+    Header,
+    TripListItem
   },
   props:{
     keyword: {
@@ -20,32 +46,39 @@ export default defineComponent({
     }
   },
   setup(props){
-    console.log(props.keyword)
+    const state = reactive({
+      searchTitle: props.keyword,
+      tripList: [] as TActivity[],
+      lineSpan: [] as number[]
+    })
+    watch(()=>props.keyword, ()=>{
+      state.searchTitle = props.keyword
+    })
 
-    // const axios = require("axios");
-    //
-    // const options = {
-    //   method: 'GET',
-    //   url: 'https://pokedex2.p.rapidapi.com/pokedex/uk',
-    //   headers: {
-    //     'X-RapidAPI-Host': 'pokedex2.p.rapidapi.com',
-    //     'X-RapidAPI-Key': 'cee7caee49msh2a537da5b34ad3ep10c2dejsn87bf65bd6a8b'
-    //   }
-    // };
-    //
-    //
-    //
-    //
-    //
-    // axios.request(options).then(function (response: any) {
-    //   console.log(response.data);
-    // }).catch(function (error: any) {
-    //   console.error(error);
-    // });
+
+    const fetchData = async () => {
+      const activity = await require("@/assets/jsonData/activity.json")
+      if(props.keyword) {
+        state.tripList = activity.filter((_: any)=>{
+          return (_.cityName).includes(props.keyword) == true
+        })
+      }else{
+        state.tripList = activity
+      }
+    }
+
+
+
+
+    onMounted( async ()=>{
+      await fetchData()
+    })
 
 
     //  https://readcereal.com/category/travel/
-    return {}
+    return {
+      ...toRefs(state),
+    }
   }
 });
 </script>
@@ -53,9 +86,21 @@ export default defineComponent({
 <style lang="scss" scoped>
 
 .trip-list {
-  .home-header-style {
-    @apply bg-primary/30;
+  background: url("@/assets/images/fixed-bg/blue-beach.jpeg") no-repeat;
+  background-size: cover;
 
+  .container {
+    min-height: 100vh;
+
+    .masonry {
+      @apply flex flex-wrap;
+    }
+  }
+  .header {
+    @apply bg-primary/30;
+  }
+  &--title {
+    @apply text-2xl;
   }
 }
 
