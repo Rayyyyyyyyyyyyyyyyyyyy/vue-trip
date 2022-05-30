@@ -1,9 +1,8 @@
 <template lang="pug">
-.back-btn
+.back-btn(@click="backClicked")
   svg-icon.mr-2(name="arrow-left")
   el-button.btn(
   type="text"
-    @click="backClicked"
   ) {{ back_text }}
 </template>
 <script lang="ts">

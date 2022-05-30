@@ -27,6 +27,11 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/trip/TripPage.vue")
   },
   {
+    path: "/user-page",
+    name: RouterNames.userPage,
+    component: () => import("@/views/UserPage.vue")
+  },
+  {
     path: "/:catchAll(.*)",
     name: RouterNames.page404,
     component: () => import("@/views/NotFound.vue")

@@ -144,6 +144,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .trip-list {
+  min-height: 100vh;
   background: url("@/assets/images/fixed-bg/blue-beach.jpeg") no-repeat;
   background-size: cover;
   @apply p-6;

@@ -3,6 +3,7 @@ const _RouterNames = {
   home: "home",
   tripList: "tripList",
   tripPage: "tripPage",
+  userPage: "userPage",
 
   page404: "page404"
 

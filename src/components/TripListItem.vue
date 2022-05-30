@@ -79,6 +79,7 @@ export default defineComponent({
 
   &-header {
     @apply rounded-xl;
+
   }
 
   &-body {

@@ -3,9 +3,7 @@
   Header
 
   .container
-    BackBtn(
-    @backClickedEmit="goBackUrl"
-    )
+    BackBtn(@backClickedEmit="goBackUrl")
     .card
       .trip-page-header
         img(:src="defaultImgUrl + tripData.imageUrl" alt="")
@@ -81,7 +79,7 @@ export default defineComponent({
 
     const goBackUrl = () => {
       router.push({
-        name: RouterNames.home
+        name: RouterNames.tripList
       })
     }
 

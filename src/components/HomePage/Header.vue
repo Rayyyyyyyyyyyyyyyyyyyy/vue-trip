@@ -1,13 +1,13 @@
 <template lang="pug">
 .header
   svg-icon(
-    @click="goHomeUrl"
+    @click="routerUrlModel.goHomeUrl()"
     name="logo" :width="40" :height="40")
   .header_center
 
   .header_right
     svg-icon(
-      @click="goUserUrl"
+      @click="routerUrlModel.goUserUrl()"
       name="user"
       :width="24"
       :height="24"
@@ -21,6 +21,7 @@ import {defineComponent} from "vue";
 import {useRouter} from "vue-router";
 import RouterNames from "@/router/name";
 import {ElMessage} from "element-plus";
+import {routerUrlModel} from "@/utils/routeUrl";
 
 
 export default defineComponent({
@@ -35,23 +36,12 @@ export default defineComponent({
 
     const router = useRouter()
 
-    const goUserUrl = () => {
-      ElMessage("Coming soon")
 
-      // router.push({
-      //   name: RouterNames.home
-      // })
-    }
-    const goHomeUrl = () => {
-      router.push({
-        name: RouterNames.home
-      });
-    }
+
 
 
     return {
-      goUserUrl,
-      goHomeUrl
+      routerUrlModel,
     }
   }
 });
