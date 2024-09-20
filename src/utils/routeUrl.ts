@@ -20,11 +20,7 @@ export class RouterUrlModel {
       name: RouterNames.home
     });
   }
-
-
-
-
-
+  
 }
 
 
