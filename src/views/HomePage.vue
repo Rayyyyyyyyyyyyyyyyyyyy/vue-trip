@@ -37,7 +37,6 @@
     .introduction--text Introduction
   .landing-header--taiwan(
     data-aos="zoom-out-left"
-    v-if="cityName != ''"
   )
     TaiwanMap(
       @clickedCity="activeClicked"
@@ -138,9 +137,9 @@ export default defineComponent({
 
     onMounted(async ()=>{
       AOS.init()
-      await navigator.geolocation.getCurrentPosition(localSuccess, (err)=>{
-        ElMessage.error(err.message);
-      })
+      // await navigator.geolocation.getCurrentPosition(localSuccess, (err)=>{
+      //   ElMessage.error(err.message);
+      // })
 
     })
 
